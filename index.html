@@ -85,22 +85,24 @@
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <nav class="flex items-center justify-between h-16">
-                <h1 class="text-2xl font-bold text-emerald-700">El Futuro Olfativo</h1>
-                <div class="hidden md:flex space-x-3 lg:space-x-4">
-                    <a href="#introduccion" class="nav-link text-stone-600 hover:text-emerald-700 px-2 py-1 rounded-md">Introducción</a>
-                    <a href="#tendencias" class="nav-link text-stone-600 hover:text-emerald-700 px-2 py-1 rounded-md">Tendencias</a>
-                    <a href="#conclusion-section" class="nav-link text-stone-600 hover:text-emerald-700 px-2 py-1 rounded-md">Conclusión</a>
-                </div>
-                <button id="mobileMenuButton" class="md:hidden text-stone-600 hover:text-emerald-700">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
-            </nav>
+    <h1 class="text-2xl font-bold text-emerald-700">El Futuro Olfativo</h1>
+    <div class="hidden md:flex space-x-3 lg:space-x-4">
+        <a href="#introduccion" class="nav-link text-stone-600 hover:text-emerald-700 px-2 py-1 rounded-md">Introducción</a>
+        <a href="#tendencias" class="nav-link text-stone-600 hover:text-emerald-700 px-2 py-1 rounded-md">Tendencias</a>
+        <a href="#conclusion-section" class="nav-link text-stone-600 hover:text-emerald-700 px-2 py-1 rounded-md">Conclusión</a>
+        <a href="#contacto" class="nav-link text-stone-600 hover:text-emerald-700 px-2 py-1 rounded-md">Contacto</a>
+    </div>
+    <button id="mobileMenuButton" class="md:hidden text-stone-600 hover:text-emerald-700">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+    </button>
+</nav>
         </div>
         <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg py-2">
-            <a href="#introduccion" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Introducción</a>
-            <a href="#tendencias" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Tendencias</a>
-            <a href="#conclusion-section" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Conclusión</a>
-        </div>
+    <a href="#introduccion" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Introducción</a>
+    <a href="#tendencias" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Tendencias</a>
+    <a href="#conclusion-section" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Conclusión</a>
+    <a href="#contacto" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Contacto</a>
+</div>
     </header>
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -261,6 +263,25 @@
     </div>
 </section>
     </main>
+    <section id="contacto" class="py-10 section-fade-in bg-white rounded-xl shadow-xl mt-10 p-6">
+    <h3 class="section-title">Contacto</h3>
+    <p class="section-subtitle">¿Tienes alguna pregunta o comentario? ¡No dudes en contactarnos!</p>
+    <form action="mailto:alegiacomelli@cloud.com" method="post" enctype="text/plain" class="max-w-md mx-auto space-y-4">
+        <div>
+            <label for="nombre" class="block text-stone-700 text-sm font-bold mb-2">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" class="shadow appearance-none border rounded w-full py-2 px-3 text-stone-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        </div>
+        <div>
+            <label for="apellido" class="block text-stone-700 text-sm font-bold mb-2">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" class="shadow appearance-none border rounded w-full py-2 px-3 text-stone-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        </div>
+        <div>
+            <label for="pregunta" class="block text-stone-700 text-sm font-bold mb-2">Pregunta:</label>
+            <textarea id="pregunta" name="pregunta" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-stone-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+        </div>
+        <button type="submit" class="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enviar</button>
+    </form>
+</section>
 
     <footer class="bg-stone-800 text-orange-50 py-8 text-center mt-10">
         <p class="text-sm">&copy; 2025 Análisis Interactivo: El Futuro Olfativo. </p>
