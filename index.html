@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -67,55 +68,112 @@
             background-color: #047857;
         }
         body {
-    font-family: 'sans-serif'; /* Elige una fuente legible */
-    line-height: 1.6; /* Interlineado para mejor lectura */
-    -webkit-font-smoothing: antialiased; /* Mejora la representación de la fuente en navegadores webkit */
-}
+            font-family: 'sans-serif'; /* Elige una fuente legible */
+            line-height: 1.6; /* Interlineado para mejor lectura */
+            -webkit-font-smoothing: antialiased; /* Mejora la representación de la fuente en navegadores webkit */
+            text-align: center; /* Centra el texto a nivel del body */
+        }
 
-p {
-    margin-bottom: 1.25rem; /* Espacio entre párrafos */
-    text-align: left; /* Alineación del texto a la izquierda (es lo más común para la lectura) */
-}
+        p {
+            margin-bottom: 1.25rem; /* Espacio entre párrafos */
+            text-align: left; /* Alineación del texto a la izquierda (para que se lea bien centrado en la página) */
+            display: inline-block; /* Para que el text-align: center del body lo afecte como bloque */
+            width: 80%; /* Ancho para el centrado */
+            max-width: 800px; /* Ancho máximo */
+        }
 
-h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 1rem; /* Espacio debajo de los encabezados */
-    font-weight: bold; /* Énfasis en los encabezados */
-    text-align: center; /* Centrar los encabezados suele funcionar bien */
-}
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 1rem; /* Espacio debajo de los encabezados */
+            font-weight: bold; /* Énfasis en los encabezados */
+            text-align: center; /* Centrar los encabezados */
+        }
 
-.section-subtitle {
-    text-align: center !important; /* Aseguramos que los subtítulos estén centrados */
-    margin-bottom: 2rem;
-    color: #374151;
-    max-width: 3xl;
-    margin-left: auto;
-    margin-right: auto;
-}
+        .section-subtitle {
+            text-align: center !important; /* Aseguramos que los subtítulos estén centrados */
+            margin-bottom: 2rem;
+            color: #374151;
+            max-width: 80%; /* Ancho para el centrado */
+            margin-left: auto;
+            margin-right: auto;
+            display: block; /* Para que se centre correctamente */
+        }
 
-.tab-content p, .tab-content ul {
-    text-align: left; /* Alineamos el texto dentro de las pestañas a la izquierda */
-}
-.list-disc {
-    margin-left: 2rem; /* Indentación para las listas */
-    margin-bottom: 1rem;
-}
+        .tab-content {
+            text-align: left; /* Alinea el contenido de las pestañas a la izquierda */
+        }
 
-.list-disc li {
-    margin-bottom: 0.5rem; /* Espacio entre los elementos de la lista */
-}
-.list-disc {
-    margin-left: 1rem;
-    padding-left: 1.5rem;
-    list-style-position: outside;
-    margin-bottom: 1rem;
-}
+        .tab-content p, .tab-content ul {
+            text-align: left; /* Alineamos el texto dentro de las pestañas a la izquierda */
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-.list-disc li {
-    text-align: left; /* Aseguramos la alineación a la izquierda del texto dentro de los li */
-    margin-left: 0; /* Reseteamos el margen izquierdo del li */
-    margin-bottom: 0.5rem;
-} 
+        .list-disc {
+            margin-left: 2rem;
+            padding-left: 1.5rem;
+            list-style-position: outside;
+            margin-bottom: 1rem;
+            text-align: left; /* Asegura la alineación a la izquierda de la lista */
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .list-disc li {
+            text-align: left; /* Alineamos el texto de los items a la izquierda */
+            margin-left: 0;
+            margin-bottom: 0.5rem;
+            display: list-item; /* Asegura que se comporte como un item de lista */
+        }
+
+        .subtle-puig-nod {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background-color: #f0fdf4;
+            border-left: 3px solid #22c55e;
+            font-size: 0.9rem;
+            color: #14532d;
+            text-align: left; /* Alinea el texto a la izquierda dentro del recuadro */
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-section {
+            background-color: #f7f7f7;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
+            text-align: left; /* Alinea el texto del formulario a la izquierda */
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-section label,
+        .contact-section input,
+        .contact-section textarea,
+        .contact-section button {
+            text-align: left; /* Alinea el texto de los elementos del formulario a la izquierda */
+            display: block; /* Para que cada elemento ocupe una línea */
+            width: 100%; /* Ancho completo dentro del contenedor */
+            margin-bottom: 0.5rem; /* Espacio entre elementos del formulario */
+        }
+
+        .contact-section button {
+            width: auto; /* El botón ocupa el ancho necesario */
+            margin-top: 1rem;
+        }
     </style>
+
 </head>
 <body class="bg-orange-50 text-stone-800 font-sans leading-relaxed">
 
