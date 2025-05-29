@@ -1,179 +1,238 @@
+ <!DOCTYPE html>
 
-<!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Futuro Olfativo: Tendencias y Marcas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .chart-container { position: relative; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto; height: 280px; max-height: 350px; }
-        @media (min-width: 768px) { .chart-container { height: 300px; } }
-        .tab-button.active { border-bottom-color: #059669; color: #047857; font-weight: 600; }
-        .tab-button { transition: all 0.3s ease; border-bottom: 2px solid transparent; }
-        .section-fade-in { animation: fadeIn 0.7s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        .brand-highlight { color: #047857; font-weight: 600; }
-        .icon-style { display: inline-block; margin-right: 8px; color: #059669; font-size: 1.1em; }
-        .nav-link { transition: color 0.3s ease; }
-        .pill-button {
-            background-color: #dcfce7; color: #15803d; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem;
-            font-weight: 500; transition: background-color 0.3s ease, color 0.3s ease; border: 1px solid transparent;
-        }
-        .pill-button:hover { background-color: #bbf7d0; }
-        .pill-button.active { background-color: #16a34a; color: white; border-color: #15803d; }
-        h3.section-title { font-size: 1.85rem; font-weight: 700; color: #065f46; margin-bottom: 0.75rem; text-align: center; }
-        p.section-subtitle { text-align: center; color: #374151; margin-bottom: 2rem; max-width: 3xl; margin-left: auto; margin-right: auto;}
-        .subtle-puig-nod { margin-top: 1rem; padding: 0.75rem; background-color: #f0fdf4; border-left: 3px solid #22c55e; font-size: 0.9rem; color: #14532d; }
-        .contact-section {
-            background-color: #f7f7f7;
-            border-radius: 0.75rem;
-            padding: 2rem;
-            margin-top: 2rem;
-            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
-        }
-        .contact-section label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        .contact-section input[type="text"],
-        .contact-section input[type="email"],
-        .contact-section textarea {
-            width: 100%;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 0.375rem;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-        .contact-section textarea {
-            min-height: 100px;
-        }
-        .contact-section button {
-            background-color: #059669;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.2s ease;
-        }
-        .contact-section button:hover {
-            background-color: #047857;
-        }
-        body {
-            font-family: 'sans-serif'; /* Elige una fuente legible */
-            line-height: 1.6; /* Interlineado para mejor lectura */
-            -webkit-font-smoothing: antialiased; /* Mejora la representación de la fuente en navegadores webkit */
-            text-align: center; /* Centra el texto a nivel del body */
-        }
 
-        p {
-            margin-bottom: 1.25rem; /* Espacio entre párrafos */
-            text-align: left; /* Alineación del texto a la izquierda (para que se lea bien centrado en la página) */
-            display: inline-block; /* Para que el text-align: center del body lo afecte como bloque */
-            width: 80%; /* Ancho para el centrado */
-            max-width: 800px; /* Ancho máximo */
-        }
+    <meta charset="UTF-8">
 
-        h1, h2, h3, h4, h5, h6 {
-            margin-bottom: 1rem; /* Espacio debajo de los encabezados */
-            font-weight: bold; /* Énfasis en los encabezados */
-            text-align: center; /* Centrar los encabezados */
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .section-subtitle {
-            text-align: center !important; /* Aseguramos que los subtítulos estén centrados */
-            margin-bottom: 2rem;
-            color: #374151;
-            max-width: 80%; /* Ancho para el centrado */
-            margin-left: auto;
-            margin-right: auto;
-            display: block; /* Para que se centre correctamente */
-        }
+    <title>El Futuro Olfativo: Tendencias y Marcas</title>
 
-        .tab-content {
-            text-align: left; /* Alinea el contenido de las pestañas a la izquierda */
-        }
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        .tab-content p, .tab-content ul {
-            text-align: left; /* Alineamos el texto dentro de las pestañas a la izquierda */
-            display: block;
-            width: 80%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        .list-disc {
-            margin-left: 2rem;
-            padding-left: 1.5rem;
-            list-style-position: outside;
-            margin-bottom: 1rem;
-            text-align: left; /* Asegura la alineación a la izquierda de la lista */
-            display: block;
-            width: 80%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    <style>
 
-        .list-disc li {
-            text-align: left; /* Alineamos el texto de los items a la izquierda */
-            margin-left: 0;
-            margin-bottom: 0.5rem;
-            display: list-item; /* Asegura que se comporte como un item de lista */
-        }
+        .chart-container { position: relative; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto; height: 280px; max-height: 350px; }
 
-        .subtle-puig-nod {
-            margin-top: 1rem;
-            padding: 0.75rem;
-            background-color: #f0fdf4;
-            border-left: 3px solid #22c55e;
-            font-size: 0.9rem;
-            color: #14532d;
-            text-align: left; /* Alinea el texto a la izquierda dentro del recuadro */
-            display: block;
-            width: 80%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        @media (min-width: 768px) { .chart-container { height: 300px; } }
 
-        .contact-section {
-            background-color: #f7f7f7;
-            border-radius: 0.75rem;
-            padding: 2rem;
-            margin-top: 2rem;
-            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
-            text-align: left; /* Alinea el texto del formulario a la izquierda */
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        .tab-button.active { border-bottom-color: #059669; color: #047857; font-weight: 600; }
 
-        .contact-section label,
-        .contact-section input,
-        .contact-section textarea,
-        .contact-section button {
-            text-align: left; /* Alinea el texto de los elementos del formulario a la izquierda */
-            display: block; /* Para que cada elemento ocupe una línea */
-            width: 100%; /* Ancho completo dentro del contenedor */
-            margin-bottom: 0.5rem; /* Espacio entre elementos del formulario */
-        }
+        .tab-button { transition: all 0.3s ease; border-bottom: 2px solid transparent; }
 
-        .contact-section button {
-            width: auto; /* El botón ocupa el ancho necesario */
-            margin-top: 1rem;
-        }
-    </style>
+        .section-fade-in { animation: fadeIn 0.7s ease-out forwards; }
 
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .brand-highlight { color: #047857; font-weight: 600; }
+
+        .icon-style { display: inline-block; margin-right: 8px; color: #059669; font-size: 1.1em; }
+
+        .nav-link { transition: color 0.3s ease; }
+
+        .pill-button {
+
+            background-color: #dcfce7; color: #15803d; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem;
+
+            font-weight: 500; transition: background-color 0.3s ease, color 0.3s ease; border: 1px solid transparent;
+
+        }
+
+        .pill-button:hover { background-color: #bbf7d0; }
+
+        .pill-button.active { background-color: #16a34a; color: white; border-color: #15803d; }
+
+        h3.section-title { font-size: 1.85rem; font-weight: 700; color: #065f46; margin-bottom: 0.75rem; text-align: center; }
+
+        p.section-subtitle { text-align: center; color: #374151; margin-bottom: 2rem; max-width: 3xl; margin-left: auto; margin-right: auto;}
+
+        .subtle-puig-nod { margin-top: 1rem; padding: 0.75rem; background-color: #f0fdf4; border-left: 3px solid #22c55e; font-size: 0.9rem; color: #14532d; }
+
+        .contact-section {
+
+            background-color: #f7f7f7;
+
+            border-radius: 0.75rem;
+
+            padding: 2rem;
+
+            margin-top: 2rem;
+
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
+
+        }
+
+        .contact-section label {
+
+            display: block;
+
+            margin-bottom: 0.5rem;
+
+            color: #555;
+
+            font-weight: 600;
+
+            font-size: 0.9rem;
+
+        }
+
+        .contact-section input[type="text"],
+
+        .contact-section input[type="email"],
+
+        .contact-section textarea {
+
+            width: 100%;
+
+            padding: 0.75rem;
+
+            margin-bottom: 1rem;
+
+            border: 1px solid #ddd;
+
+            border-radius: 0.375rem;
+
+            box-sizing: border-box;
+
+            font-size: 1rem;
+
+        }
+
+        .contact-section textarea {
+
+            min-height: 100px;
+
+        }
+
+        .contact-section button {
+
+            background-color: #059669;
+
+            color: white;
+
+            padding: 0.75rem 1.5rem;
+
+            border: none;
+
+            border-radius: 0.375rem;
+
+            cursor: pointer;
+
+            font-size: 1rem;
+
+            transition: background-color 0.2s ease;
+
+        }
+
+        .contact-section button:hover {
+
+            background-color: #047857;
+
+        }
+
+        body {
+
+    font-family: 'sans-serif'; /* Elige una fuente legible */
+
+    line-height: 1.6; /* Interlineado para mejor lectura */
+
+    -webkit-font-smoothing: antialiased; /* Mejora la representación de la fuente en navegadores webkit */
+
+}
+
+
+
+p {
+
+    margin-bottom: 1.25rem; /* Espacio entre párrafos */
+
+    text-align: left; /* Alineación del texto a la izquierda (es lo más común para la lectura) */
+
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+
+    margin-bottom: 1rem; /* Espacio debajo de los encabezados */
+
+    font-weight: bold; /* Énfasis en los encabezados */
+
+    text-align: center; /* Centrar los encabezados suele funcionar bien */
+
+}
+
+
+
+.section-subtitle {
+
+    text-align: center !important; /* Aseguramos que los subtítulos estén centrados */
+
+    margin-bottom: 2rem;
+
+    color: #374151;
+
+    max-width: 3xl;
+
+    margin-left: auto;
+
+    margin-right: auto;
+
+}
+
+
+
+.tab-content p, .tab-content ul {
+
+    text-align: left; /* Alineamos el texto dentro de las pestañas a la izquierda */
+
+}
+
+.list-disc {
+
+    margin-left: 2rem; /* Indentación para las listas */
+
+    margin-bottom: 1rem;
+
+}
+
+
+
+.list-disc li {
+
+    margin-bottom: 0.5rem; /* Espacio entre los elementos de la lista */
+
+}
+
+.list-disc {
+
+    margin-left: 1rem;
+
+    padding-left: 1.5rem;
+
+    list-style-position: outside;
+
+    margin-bottom: 1rem;
+
+}
+
+
+
+.list-disc li {
+
+    text-align: left; /* Aseguramos la alineación a la izquierda del texto dentro de los li */
+
+    margin-left: 0; /* Reseteamos el margen izquierdo del li */
+
+    margin-bottom: 0.5rem;
+
+} 
+
+    </style>
 </head>
 <body class="bg-orange-50 text-stone-800 font-sans leading-relaxed">
 
