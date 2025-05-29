@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Futuro Olfativo: Estrategias para Puig</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Application Structure Plan:
+    The SPA is structured to guide the user from a general market overview to specific trends and Puig's strategic opportunities.
+    1.  **Introducción:** A captivating entry point setting the stage.
+    2.  **Pulso del Mercado (Market Pulse):** Presents key market dynamics and growth projections (Table 1 data visualized) to establish context. Interactive charts for engagement.
+    3.  **Las 4 Claves del Futuro (The 4 Keys to the Future):** A central hub using a tabbed navigation for each of the four core trends (Sostenibilidad, Tecnología, Bienestar, Personalización). Each trend section will detail:
+        * Descripción de la tendencia.
+        * Ejemplos de marcas innovadoras.
+        * Posicionamiento y iniciativas actuales de Puig.
+        * Recomendaciones estratégicas para Puig.
+        This structure allows focused exploration of each critical area.
+    4.  **Puig: Visión Estratégica (Puig: Strategic Vision):** Consolidates Puig's overall strengths (ESG - Table 2 visualized/summarized) and synthesizes the cross-trend recommendations from Table 3, showing how Puig can holistically address the future.
+    5.  **Conclusión:** A brief summary reinforcing Puig's potential.
+    **User Flow:** Landing -> Market Overview (optional) -> Deep dive into selected Trends -> Puig's Strategic Response -> Conclusion.
+    **Why this structure?:** This thematic and layered approach is more user-friendly than a linear report. It allows users to quickly grasp the main points and then delve into areas of specific interest, promoting better understanding and engagement with complex information. The focus is on making the strategic implications for Puig clear and accessible. -->
+    <!-- Visualization & Content Choices:
+    **General Approach:** Transform report data and text into interactive and easily digestible formats. Prioritize clarity and user engagement.
+    **1. Introducción:**
+        * Goal: Engage, set context.
+        * Viz/Method: Compelling headline, brief introductory text.
+        * Interaction: Static.
+        * Justification: Clear entry point.
+    **2. Pulso del Mercado (Market Pulse):**
+        * Report Info: "Dinamismo del Mercado Global de Fragancias", Table 1 data.
+        * Goal: Inform about market size, growth, key segments.
+        * Viz/Method:
+            * Bar Chart (Chart.js) for Global Market Value (2023 vs 2031).
+            * Donut Chart (Chart.js) for Regional Growth/Share (Asia-Pacific highlight).
+            * Key Stat Callouts (HTML/Tailwind) for CAGR.
+        * Interaction: Chart tooltips.
+        * Justification: Visual representation of key numbers is more impactful than a table.
+        * Library: Chart.js.
+    **3. Las 4 Claves del Futuro (Trends - Sostenibilidad, Tecnología, Bienestar, Personalización):**
+        * Report Info: Sections III, IV, V, VI of the source report.
+        * Goal: Detail each trend, show examples, Puig's role, and recommendations.
+        * Viz/Method:
+            * **Layout:** Tabbed interface for each trend.
+            * **Content:** Summarized text for trend description, brand examples (lists/cards), Puig's current initiatives (bullet points with Unicode icons like 🌿, 💻, ❤️, ✨). Recommendations presented clearly.
+            * **Puig's Sustainability (Table 2 data - within Sostenibilidad trend):** Key achievements as dynamic stat cards (e.g., EcoVadis Gold, CDP 'A') or a compact, styled HTML table.
+        * Interaction: Clicking tabs to switch trends.
+        * Justification: Organizes dense information logically. Icons and cards improve scannability.
+        * Library: Chart.js for Puig's Sustainability Hitos chart.
+    **4. Puig: Visión Estratégica:**
+        * Report Info: Puig's ESG summary, Table 3 (Opportunities for Puig).
+        * Goal: Synthesize Puig's strategic response across trends.
+        * Viz/Method:
+            * **Table 3 data:** Presented as an interactive set of cards, one for each trend, summarizing Puig's position and opportunities.
+            * Introductory text summarizing Puig's strengths.
+        * Interaction: Minimal, focus on clear presentation.
+        * Justification: Provides a consolidated view of Puig's strategic path forward.
+    **5. Conclusión:**
+        * Report Info: Section VII of the source report.
+        * Goal: Summarize and provide a forward-looking statement.
+        * Viz/Method: Brief concluding text.
+        * Interaction: Static.
+    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. Canvas for charts (Chart.js), HTML/CSS/Tailwind/Unicode for other visual elements and icons. -->
+    <style>
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        .tab-button.active { border-bottom-color: #059669; color: #047857; }
+        .tab-button { transition: all 0.3s ease; }
+        .section-fade-in { animation: fadeIn 0.8s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .icon-style { display: inline-block; margin-right: 8px; color: #059669; }
+        .pill-button {
+            background-color: #d1fae5; color: #065f46; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem;
+            font-weight: 500; transition: background-color 0.3s ease;
+        }
+        .pill-button:hover { background-color: #a7f3d0; }
+        .pill-button.active { background-color: #059669; color: white; }
+    </style>
+</head>
+<body class="bg-orange-50 text-stone-800 font-sans leading-relaxed">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex items-center justify-between h-16">
+                <h1 class="text-2xl font-bold text-emerald-700">El Futuro Olfativo</h1>
+                <div class="space-x-4">
+                    <a href="#introduccion" class="nav-link text-stone-600 hover:text-emerald-700">Introducción</a>
+                    <a href="#mercado" class="nav-link text-stone-600 hover:text-emerald-700">Mercado</a>
+                    <a href="#tendencias" class="nav-link text-stone-600 hover:text-emerald-700">Tendencias</a>
+                    <a href="#puig-vision" class="nav-link text-stone-600 hover:text-emerald-700">Visión Puig</a>
+                    <a href="#conclusion" class="nav-link text-stone-600 hover:text-emerald-700">Conclusión</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <section id="introduccion" class="py-12 section-fade-in">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold text-emerald-700 mb-4">Descifrando el Futuro Olfativo</h2>
+                <p class="text-xl text-stone-700 max-w-3xl mx-auto">
+                    La industria de las fragancias vive una transformación sin precedentes. Este análisis interactivo explora las tendencias emergentes que van más allá del nicho y cómo Puig, con su legado y visión, puede capitalizarlas para liderar la próxima era de la perfumería.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Resumen Ejecutivo del Informe</h3>
+                <p class="text-stone-700 mb-4">
+                    El mercado global de fragancias está en auge, proyectándose alcanzar los 87.67 mil millones de dólares para 2031. Este crecimiento se impulsa por una revalorización del perfume como expresión personal y la penetración en nuevos segmentos. Cuatro macrotendencias definen este cambio: **sostenibilidad y transparencia**, la **convergencia de tecnología y perfumería**, el **bienestar y funcionalidad**, y la **personalización a gran escala**.
+                </p>
+                <p class="text-stone-700">
+                    Puig, con su trayectoria en marcas icónicas, compromiso ESG y liderazgo tecnológico (AirParfum, WikiParfum), está idealmente posicionada. Se recomienda a Puig consolidar su liderazgo en sostenibilidad, expandir innovaciones tecnológicas, desarrollar fragancias funcionales y escalar la personalización para seguir moldeando el futuro olfativo.
+                </p>
+            </div>
+        </section>
+        
+        <div class="my-8 border-t border-stone-300"></div>
+
+        <section id="mercado" class="py-12 section-fade-in">
+            <h2 class="text-3xl font-bold text-emerald-700 mb-2 text-center">Pulso del Mercado Global de Fragancias</h2>
+            <p class="text-center text-stone-600 mb-8 max-w-2xl mx-auto">
+                La industria de las fragancias está experimentando un crecimiento robusto, redefiniendo el lujo y la expresión personal. Esta sección visualiza las proyecciones clave y los impulsores de este dinámico mercado.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-emerald-700 mb-4 text-center">Proyección del Valor del Mercado Global (Miles de Millones USD)</h3>
+                    <div class="chart-container h-[300px] md:h-[350px]">
+                        <canvas id="marketValueChart"></canvas>
+                    </div>
+                    <p class="text-sm text-stone-500 mt-2 text-center">Fuente: Informe "El Futuro Olfativo", Tabla 1.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-emerald-700 mb-4 text-center">Región de Mayor Crecimiento y Cuota</h3>
+                    <div class="chart-container h-[300px] md:h-[350px]">
+                        <canvas id="regionalGrowthChart"></canvas>
+                    </div>
+                     <p class="text-sm text-stone-500 mt-2 text-center">Fuente: Informe "El Futuro Olfativo", Tabla 1.</p>
+                </div>
+            </div>
+            <div class="mt-8 bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold text-emerald-700 mb-4">Impulsores Clave del Crecimiento</h3>
+                <ul class="list-disc list-inside space-y-2 text-stone-700">
+                    <li>Aumento de los ingresos disponibles y enfoque en el cuidado personal.</li>
+                    <li>Estrategias de marketing efectivas y cambios en las preferencias de los consumidores.</li>
+                    <li>Creciente demanda de perfumes de lujo y premiumización.</li>
+                    <li>Incorporación de nuevos segmentos: hombres y consumidores jóvenes (Gen Z, Gen Alpha). La Gen Z busca autenticidad y posee múltiples fragancias.</li>
+                    <li>Expansión del comercio electrónico, mejorando la accesibilidad y la necesidad de experiencias "phygital".</li>
+                </ul>
+                <p class="mt-4 text-stone-700 font-semibold">La CAGR proyectada para el mercado global (2024-2031) es del <span class="text-emerald-700">6.31%</span>.</p>
+            </div>
+        </section>
+
+        <div class="my-8 border-t border-stone-300"></div>
+
+        <section id="tendencias" class="py-12 section-fade-in">
+            <h2 class="text-3xl font-bold text-emerald-700 mb-2 text-center">Las 4 Claves del Futuro Olfativo</h2>
+            <p class="text-center text-stone-600 mb-8 max-w-2xl mx-auto">
+                Cuatro macrotendencias están redefiniendo la industria de las fragancias. Explore cada una para entender su impacto, ver ejemplos de innovación y descubrir las oportunidades estratégicas para Puig.
+            </p>
+            <div class="mb-6 flex flex-wrap justify-center gap-2 sm:gap-4">
+                <button data-tab="sostenibilidad" class="tab-button pill-button active">🌿 Sostenibilidad</button>
+                <button data-tab="tecnologia" class="tab-button pill-button">💻 Tecnología</button>
+                <button data-tab="bienestar" class="tab-button pill-button">❤️ Bienestar</button>
+                <button data-tab="personalizacion" class="tab-button pill-button">✨ Personalización</button>
+            </div>
+
+            <div id="sostenibilidad" class="tab-content bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold text-emerald-700 mb-3">🌿 Sostenibilidad y Transparencia</h3>
+                <p class="text-stone-700 mb-4">La sostenibilidad es un pilar central, especialmente para la Gen Z. Los consumidores buscan marcas responsables, ingredientes de origen ético, envases eco-friendly y transparencia en la cadena de suministro. La sostenibilidad se está convirtiendo en un nuevo símbolo de lujo y calidad.</p>
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2">Innovaciones Destacadas:</h4>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li>Ingredientes: Alcohol orgánico, biotecnología para sintéticos, foco en naturales y ecocertificados.</li>
+                            <li>Envases: Papeles compostables, tintas al agua, reducción de plásticos, vidrio reciclado (PCR), tapones de madera/aluminio, diseño minimalista y separable para reciclaje.</li>
+                            <li>Transparencia: Trazabilidad de ingredientes (ej. "Respeto a las abejas" de Guerlain).</li>
+                        </ul>
+                         <h4 class="text-lg font-semibold text-emerald-600 mt-4 mb-2">Ejemplos de Marcas Líderes:</h4>
+                        <p class="text-stone-700">Pour le Monde (vegana, cruelty-free), Tsi-La Organics, ABEL (100% natural, trazable), Sana Jardin (ODS), MAAR (España, 97% natural, local).</p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2">Posición de Puig:</h4>
+                         <p class="text-stone-700 mb-2">Puig demuestra un compromiso integral con su Agenda ESG 2030 (Net Zero 2050). Destacan:</p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li>Certificaciones: EcoVadis Oro (80/100), Sustainalytics (9ª en industria), CDP 'A' (Clima), CDP 'A-' (Agua).</li>
+                            <li>Eficiencia: 74% electricidad renovable, 4/7 fábricas cero residuos, -24% emisiones transporte aéreo.</li>
+                            <li>Ingredientes: Objetivo 90% origen natural en nuevos desarrollos, trazabilidad de materias primas.</li>
+                        </ul>
+                        <div class="chart-container h-[250px] mt-4">
+                             <canvas id="puigSustainabilityChart"></canvas>
+                        </div>
+                        <p class="text-sm text-stone-500 mt-1 text-center">Hitos clave de sostenibilidad de Puig.</p>
+                    </div>
+                </div>
+                <h4 class="text-lg font-semibold text-emerald-600 mb-2">Oportunidades y Recomendaciones para Puig:</h4>
+                <ul class="list-disc list-inside space-y-1 text-stone-700">
+                    <li><strong>Fortalecer Origen Mediterráneo:</strong> Desarrollar colecciones "Mediterranean Sourced" o "Essences of the Mediterranean", enfatizando trazabilidad e impacto local positivo (similar a MAAR).</li>
+                    <li><strong>Comunicación Transparente:</strong> Implementar plataforma digital interactiva para rastrear origen de ingredientes, mostrando impacto positivo y uso de materiales sostenibles.</li>
+                </ul>
+            </div>
+
+            <div id="tecnologia" class="tab-content hidden bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold text-emerald-700 mb-3">💻 Convergencia de Tecnología y Perfumería</h3>
+                <p class="text-stone-700 mb-4">La IA y las tecnologías digitales están revolucionando la creación de fragancias, la personalización y la experiencia del consumidor. Desde la formulación asistida por IA hasta las pruebas virtuales, la tecnología es un co-creador que potencia el arte del perfumista.</p>
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2">Aplicaciones de la IA y Digitalización:</h4>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li>Formulación: IA para analizar materias primas y sugerir combinaciones (ej. ScentElligence de Cosmo, Carto de Givaudan).</li>
+                            <li>Personalización: Recomendaciones basadas en IA (Wikiparfum), dispositivos inteligentes para mezclas (NINU), análisis de respuesta facial (Estée Lauder).</li>
+                            <li>Experiencias Digitales: Pruebas virtuales (ModiFace de L'Oréal), chatbots de belleza (Lancôme), solución a "saturación olfativa" en tiendas.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2">Puig como Pionero Tecnológico:</h4>
+                        <p class="text-stone-700 mb-2">Puig ha invertido significativamente en tecnología:</p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li><strong>WikiParfum:</strong> Plataforma digital (24k productos, 1.4k ingredientes) para descubrir y comparar perfumes. Aumenta ventas online 5%.</li>
+                            <li><strong>AirParfum:</strong> Tecnología patentada para probar múltiples fragancias sin saturación (extracción de alcohol). Más de 65 instalaciones, expansión a sabores y salud (ensayo Alzheimer/Parkinson).</li>
+                            <li>Otras: Charlotte Tilbury App (beauty tech), Carolina Herrera NFTs, Rabanne Virtual Try-On, Penhaligon's Refill Program, Scent Visualizer (Tmall).</li>
+                        </ul>
+                    </div>
+                </div>
+                <h4 class="text-lg font-semibold text-emerald-600 mb-2">Oportunidades y Recomendaciones para Puig:</h4>
+                <ul class="list-disc list-inside space-y-1 text-stone-700">
+                    <li><strong>Integración Profunda de IA en I+D:</strong> Usar IA para co-crear moléculas, optimizar ingredientes sostenibles y acelerar lanzamientos.</li>
+                    <li><strong>Expansión Global de Experiencias Phygital:</strong> Acelerar implementación de AirParfum/WikiParfum en mercados clave. Desarrollar experiencias interactivas en tienda combinando diagnóstico, prueba sin saturación y personalización.</li>
+                </ul>
+            </div>
+
+            <div id="bienestar" class="tab-content hidden bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold text-emerald-700 mb-3">❤️ Bienestar y Funcionalidad</h3>
+                <p class="text-stone-700 mb-4">Los "perfumes wellbeing" buscan mejorar el bienestar personal más allá de la estética. El mercado global del bienestar (1.5 billones USD) muestra un fuerte interés en productos con beneficios emocionales o funcionales. El olfato es una vía rápida para influir en estados cognitivos y emocionales.</p>
+                 <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2">Cómo Funcionan y Ejemplos:</h4>
+                        <p class="text-stone-700 mb-2">Combinan aroma con ingredientes activos, aprovechando la neurociencia para beneficios como concentración o relajación. Se basan en investigación científica (neurociencia, fMRI).</p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li><strong>The Nue Co.:</strong> Fragancias funcionales (ej. *Mind Energy* para concentración).</li>
+                            <li><strong>Øthers:</strong> Tecnología olfativa y sonora (ej. *Red Skies* para concentración).</li>
+                            <li><strong>Edeniste:</strong> Activos desestresantes patentados (ej. *LifeBoosts* para felicidad).</li>
+                            <li>Otros: Cosmoss (*Sacred Mist* para calma), FEWE (*Eau So Happy* para cambios hormonales).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2">Puig y el Bienestar:</h4>
+                        <p class="text-stone-700 mb-2">El propósito de Puig incluye "fomentar el bienestar, la confianza y la autoexpresión".</p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li>Marcas en "Skincare Wellness": Kama Ayurveda, Loto del Sur.</li>
+                            <li>Fragancias tradicionales asociadas al bienestar: Agua Lavanda Puig (relajación), Agua Brava (energía).</li>
+                            <li>Iniciativas internas: #BeCampaigns para empleados.</li>
+                        </ul>
+                        <p class="text-stone-700 mt-3">Puig puede capitalizar la conexión emocional existente de sus fragancias clásicas, re-comercializándolas con un enfoque explícito en sus beneficios aromacológicos.</p>
+                    </div>
+                </div>
+                <h4 class="text-lg font-semibold text-emerald-600 mb-2">Oportunidades y Recomendaciones para Puig:</h4>
+                <ul class="list-disc list-inside space-y-1 text-stone-700">
+                    <li><strong>Desarrollo de Líneas Funcionales Explícitas:</strong> Crear nuevas líneas (Prestige/Niche o nueva marca) enfocadas en beneficios específicos (estrés, sueño, concentración), respaldadas por neurociencia.</li>
+                    <li><strong>Colaboración Estratégica con Expertos:</strong> Alianzas con institutos de neurociencia/aromacología para validar científicamente efectos y posicionar a Puig como líder innovador.</li>
+                </ul>
+            </div>
+
+            <div id="personalizacion" class="tab-content hidden bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold text-emerald-700 mb-3">✨ Personalización a Gran Escala</h3>
+                <p class="text-stone-700 mb-4">La personalización es una tendencia fundamental. Los consumidores, especialmente la Gen Z, buscan fragancias únicas que expresen su individualidad (70% jóvenes UK, 61% España consideran fragancia como "marca personal"). La personalización eleva el lujo a "poseer *mi* aroma único".</p>
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2">Modelos de Personalización y Ejemplos:</h4>
+                         <p class="text-stone-700 mb-2">Avances en IA y plataformas digitales democratizan la perfumería a medida.</p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li>Fragancias customizables: Colaboración marca-fabricante, consumidor elige notas. Feedback crucial.</li>
+                            <li>Experiencias Phygital: Combinación digital (IA, AR) y físico (tiendas) para creación inmersiva.</li>
+                            <li>Layering de perfumes: Combinar diferentes fragancias.</li>
+                            <li>Marcas: NINU (dispositivo inteligente), Perfumérica (creación guiada), SOB Fragrance (personalización integral), EveryHuman (IA para aromas rápidos).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-emerald-600 mb-2">Puig en la Personalización:</h4>
+                        <p class="text-stone-700 mb-2">Puig cuenta con profunda experiencia en creación, portafolio diverso y herramientas digitales avanzadas.</p>
+                        <ul class="list-disc list-inside space-y-1 text-stone-700">
+                            <li><strong>WikiParfum:</strong> Mapeo de preferencias, base para personalización profunda.</li>
+                            <li><strong>AirParfum:</strong> Exploración sensorial efectiva para probar combinaciones.</li>
+                            <li>Capacidad I+D y portafolio: Vasta paleta de ingredientes y perfiles olfativos.</li>
+                            <li>Estrategia de expansión: Alianzas (Scent Library en China) que pueden incluir modelos de personalización.</li>
+                        </ul>
+                         <p class="text-stone-700 mt-3">La sinergia entre la experiencia de Puig y sus tecnologías le permite ofrecer co-creación guiada, donde el consumidor participa activamente.</p>
+                    </div>
+                </div>
+                <h4 class="text-lg font-semibold text-emerald-600 mb-2">Oportunidades y Recomendaciones para Puig:</h4>
+                <ul class="list-disc list-inside space-y-1 text-stone-700">
+                    <li><strong>Lanzar Programas de Personalización Semi-Personalizada:</strong> Consumidores eligen base y añaden modificadores/capas. Implementar vía experiencia phygital.</li>
+                    <li><strong>Crear Kits de Layering de Lujo:</strong> Bajo marcas Prestige/Niche (Byredo, Penhaligon's), con guías digitales sobre cómo combinar.</li>
+                    <li><strong>Aprovechar Datos de Preferencias:</strong> Usar datos de WikiParfum/AirParfum para identificar tendencias y adaptar ofertas de personalización.</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="my-8 border-t border-stone-300"></div>
+
+        <section id="puig-vision" class="py-12 section-fade-in">
+            <h2 class="text-3xl font-bold text-emerald-700 mb-2 text-center">Puig: Visión Estratégica Integrada</h2>
+            <p class="text-center text-stone-600 mb-8 max-w-2xl mx-auto">
+                Puig se encuentra en una posición privilegiada para liderar el futuro de la perfumería. Esta sección consolida las oportunidades clave para Puig, alineando sus fortalezas con las macrotendencias del sector.
+            </p>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold text-emerald-700 mb-4">Oportunidades Clave para Puig por Tendencia (Resumen Tabla 3)</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-emerald-50 p-4 rounded-lg shadow">
+                        <h4 class="font-semibold text-emerald-700 mb-2"><span class="icon-style">🌿</span>Sostenibilidad y Transparencia</h4>
+                        <p class="text-sm text-stone-700"><strong>Posición Puig:</strong> Fuerte Agenda ESG, altas certificaciones, 90% ingredientes naturales (nuevos).</p>
+                        <p class="text-sm text-stone-700 mt-2"><strong>Oportunidades:</strong> Capitalizar herencia mediterránea (ingredientes trazables); plataforma digital de transparencia.</p>
+                    </div>
+                    <div class="bg-emerald-50 p-4 rounded-lg shadow">
+                        <h4 class="font-semibold text-emerald-700 mb-2"><span class="icon-style">💻</span>Tecnología-Perfumería</h4>
+                        <p class="text-sm text-stone-700"><strong>Posición Puig:</strong> Pionero con WikiParfum y AirParfum.</p>
+                        <p class="text-sm text-stone-700 mt-2"><strong>Oportunidades:</strong> Integrar IA en I+D para co-creación; expandir globalmente experiencias phygital.</p>
+                    </div>
+                    <div class="bg-emerald-50 p-4 rounded-lg shadow">
+                        <h4 class="font-semibold text-emerald-700 mb-2"><span class="icon-style">❤️</span>Bienestar y Funcionalidad</h4>
+                        <p class="text-sm text-stone-700"><strong>Posición Puig:</strong> Propósito de marca enfocado en bienestar; marcas Skincare Wellness; fragancias clásicas asociadas.</p>
+                        <p class="text-sm text-stone-700 mt-2"><strong>Oportunidades:</strong> Desarrollar líneas funcionales explícitas (respaldo neurociencia); colaborar con expertos.</p>
+                    </div>
+                    <div class="bg-emerald-50 p-4 rounded-lg shadow">
+                        <h4 class="font-semibold text-emerald-700 mb-2"><span class="icon-style">✨</span>Personalización a Gran Escala</h4>
+                        <p class="text-sm text-stone-700"><strong>Posición Puig:</strong> WikiParfum (preferencias), AirParfum (exploración), amplio portafolio.</p>
+                        <p class="text-sm text-stone-700 mt-2"><strong>Oportunidades:</strong> Programas semi-personalizados; kits de layering de lujo; usar datos para innovación.</p>
+                    </div>
+                </div>
+                 <h3 class="text-2xl font-semibold text-emerald-700 mt-8 mb-4">Recomendaciones Estratégicas Integradas</h3>
+                <ul class="list-disc list-inside space-y-2 text-stone-700">
+                    <li><strong>Liderazgo Sostenible con Raíces Mediterráneas:</strong> Consolidar narrativa de sostenibilidad, destacando herencia y trazabilidad.</li>
+                    <li><strong>Pionero en Experiencia Olfativa Phygital:</strong> Expandir AirParfum/WikiParfum globalmente; integrar en co-creación inmersiva en tiendas.</li>
+                    <li><strong>Innovación en Fragancias Funcionales:</strong> Invertir en I+D para líneas con beneficios emocionales/funcionales explícitos (respaldo neurociencia).</li>
+                    <li><strong>Escalar Personalización Inteligente:</strong> Usar IA y datos de preferencias para personalización a gran escala (kits layering, semi-personalizadas).</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="my-8 border-t border-stone-300"></div>
+
+        <section id="conclusion" class="py-12 section-fade-in">
+            <h2 class="text-3xl font-bold text-emerald-700 mb-2 text-center">Conclusión: El Arquitecto del Futuro Olfativo</h2>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <p class="text-stone-700 mb-4 max-w-2xl mx-auto">
+                    El mercado de fragancias, impulsado por consumidores que valoran la autenticidad, la autoexpresión y la responsabilidad, presenta un horizonte de oportunidades. Las tendencias de sostenibilidad, tecnología, bienestar y personalización son las claves de este nuevo paradigma.
+                </p>
+                <p class="text-stone-700 font-semibold max-w-2xl mx-auto">
+                    Puig, con su visión estratégica, su compromiso con la innovación y la sostenibilidad, y su capacidad para crear marcas icónicas, está excepcionalmente equipado para no solo navegar este futuro, sino para ser su arquitecto principal, redefiniendo el significado de la fragancia en el siglo XXI.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-orange-50 py-8 text-center">
+        <p>&copy; 2024 Análisis Interactivo del Futuro Olfativo. Basado en el informe para Puig.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, 
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.classList.remove('bg-emerald-600', 'text-white'); 
+                        btn.classList.add('bg-emerald-50', 'text-emerald-700');
+                    });
+                    button.classList.add('active');
+                    button.classList.add('bg-emerald-600', 'text-white');
+                    button.classList.remove('bg-emerald-50', 'text-emerald-700');
+
+
+                    const targetTab = button.dataset.tab;
+                    tabContents.forEach(content => {
+                        if (content.id === targetTab) {
+                            content.classList.remove('hidden');
+                            content.classList.add('section-fade-in');
+                        } else {
+                            content.classList.add('hidden');
+                            content.classList.remove('section-fade-in');
+                        }
+                    });
+                });
+            });
+            
+            function formatLabel(str, maxLength = 16) {
+                if (str.length <= maxLength) return str;
+                const words = str.split(' ');
+                let currentLine = '';
+                const lines = [];
+                for (const word of words) {
+                    if ((currentLine + word).length > maxLength) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                    }
+                    currentLine += word + ' ';
+                }
+                lines.push(currentLine.trim());
+                return lines.filter(line => line.length > 0);
+            }
+
+            const marketValueCtx = document.getElementById('marketValueChart')?.getContext('2d');
+            if (marketValueCtx) {
+                new Chart(marketValueCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Valor Mercado 2023', 'Valor Proyectado 2031'],
+                        datasets: [{
+                            label: 'Miles de Millones USD',
+                            data: [57.14, 87.67],
+                            backgroundColor: ['rgba(5, 150, 105, 0.7)', 'rgba(4, 120, 87, 0.7)'],
+                            borderColor: ['#059669', '#047857'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true, title: { display: true, text: 'Miles de Millones USD' } } },
+                        plugins: { legend: { display: false }, tooltip: { displayColors: false } }
+                    }
+                });
+            }
+
+            const regionalGrowthCtx = document.getElementById('regionalGrowthChart')?.getContext('2d');
+            if (regionalGrowthCtx) {
+                new Chart(regionalGrowthCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Asia-Pacífico (Mayor Crecimiento)', 'Norteamérica (Líder 2024)', 'Resto del Mundo'],
+                        datasets: [{
+                            label: 'Cuota/Crecimiento de Mercado',
+                            data: [28.86, (87.67 * 0.3547), (87.67 * (1-0.3547) - 28.86) ], 
+                            backgroundColor: ['rgba(5, 150, 105, 0.7)', 'rgba(13, 148, 136, 0.7)', 'rgba(107, 114, 128, 0.5)'],
+                            borderColor: ['#059669', '#0d9488', '#6b7280'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { 
+                            legend: { position: 'bottom' }, 
+                            tooltip: { 
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) { label += ': '; }
+                                        if (context.parsed !== null) {
+                                            label += context.parsed.toFixed(2) + ' (Valor Proyectado 2031 MM USD)';
+                                            if(context.label === 'Asia-Pacífico (Mayor Crecimiento)') label += ' | CAGR 7.14%';
+                                            if(context.label === 'Norteamérica (Líder 2024)') label += ' | Cuota 35.47% en 2024';
+                                        }
+                                        return formatLabel(label);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            const puigSustainabilityCtx = document.getElementById('puigSustainabilityChart')?.getContext('2d');
+            if (puigSustainabilityCtx) {
+                new Chart(puigSustainabilityCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: formatLabel('EcoVadis Oro (80/100)').concat(formatLabel('CDP Clima (A)'), formatLabel('CDP Agua (A-)'), formatLabel('Elec. Renovable (74%)')),
+                        datasets: [{
+                            label: 'Hitos de Sostenibilidad Puig',
+                            data: [80, 100, 90, 74], 
+                            backgroundColor: [
+                                'rgba(5, 150, 105, 0.7)',  
+                                'rgba(4, 120, 87, 0.7)',
+                                'rgba(13, 148, 136, 0.7)',
+                                'rgba(15, 118, 110, 0.7)' 
+                            ],
+                            borderColor: [
+                                '#059669',
+                                '#047857',
+                                '#0d9488',
+                                '#0f766e'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { 
+                            x: { 
+                                beginAtZero: true, 
+                                max: 100,
+                                title: { display: true, text: 'Puntuación / Porcentaje' } 
+                            },
+                            y: {
+                                ticks: {
+                                    callback: function(value, index, values) {
+                                        const originalLabels = ['EcoVadis Oro (80/100)', 'CDP Clima (A)', 'CDP Agua (A-)', 'Elec. Renovable (74%)'];
+                                        return formatLabel(originalLabels[index], 15); 
+                                    }
+                                }
+                            }
+                        },
+                        plugins: { 
+                            legend: { display: false },
+                            tooltip: {
+                                displayColors: false,
+                                callbacks: {
+                                    title: function(tooltipItems) {
+                                         const originalLabels = ['EcoVadis Oro (80/100)', 'CDP Clima (A)', 'CDP Agua (A-)', 'Elec. Renovable (74%)'];
+                                         return originalLabels[tooltipItems[0].dataIndex];
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
