@@ -6,59 +6,6 @@
     <title>El Futuro Olfativo: Tendencias y Marcas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Application Structure Plan:
-    The SPA is designed to explore key fragrance industry trends and how major brands are positioned.
-    1.  **Introducción:** Sets the context of a transforming fragrance market and introduces the 4 key trends to be explored. Includes a small chart for market growth visualization.
-    2.  **Tendencias que Definen el Mañana:** A tabbed interface for:
-        * 🌿 Sostenibilidad y Transparencia
-        * 💻 Tecnología y Perfumería Digital
-        * ❤️ Bienestar y Funcionalidad
-        * ✨ Personalización a Gran Escala
-        Each tab details:
-            * Descripción de la tendencia (relevance, consumer demand).
-            * Marcas Innovadoras y Estrategias (how major players like LVMH, L'Oréal, Coty, ELC, Chanel, Hermès, Puig, and other niche innovators are addressing the trend, with examples).
-            * Perspectiva y Oportunidad (a subtle nod to how a company with Puig's type of strengths could capitalize).
-    3.  **Conclusión:** Summarizes the importance of these trends for future market leadership.
-    **User Flow:** General Intro -> Select a Trend -> Explore Trend Details & Brand Strategies -> Move to another Trend or Conclusion.
-    **Why this structure?:** This thematic approach directly addresses the user's request to focus on trends first. The tabbed navigation allows for easy comparison and deep dives into specific areas of interest. The "subtle Puig nod" is integrated into each trend's perspective, making it contextual rather than a standalone section.
-    -->
-    <!-- Visualization & Content Choices:
-    **1. Introducción:**
-        * Report Info: Section I.A, I.B from "Futuro olfativo: tendencias y marcas".
-        * Goal: Engage, provide market context, outline SPA focus.
-        * Viz/Method: Text summary, dynamic stat callouts, and a simple bar chart for market projection (Chart.js).
-        * Interaction: Chart tooltips.
-    **2. Tendencias que Definen el Mañana (Tabs):**
-        * **🌿 Sostenibilidad y Transparencia:**
-            * Report Info: Section II.C for trend description; Section III for major brands' initiatives (Puig, LVMH, L'Oréal, Coty, ELC, Chanel, Hermès). Examples like DSM-Firmenich's Clearwood, Coty's carbon-captured alcohol, L'Oréal's waterless extraction.
-            * Goal: Explain trend, show brand responses.
-            * Viz/Method: Text, bullet points, Unicode icons.
-            * Interaction: Tab switching.
-            * Subtle Puig Nod: Focus on Mediterranean sourcing, transparency platforms.
-        * **💻 Tecnología y Perfumería Digital:**
-            * Report Info: Section II.A (focus on tech convergence) for trend description; Section III for major brands' initiatives (Puig's AirParfum/WikiParfum, L'Oréal's ModiFace/AI, ELC's ConsumerIQ, Coty's AI planning). Examples like EveryHuman, Estée Lauder's facial recognition.
-            * Goal: Explain trend, show brand responses.
-            * Viz/Method: Text, bullet points, Unicode icons.
-            * Interaction: Tab switching.
-            * Subtle Puig Nod: Leveraging existing tech (AirParfum/WikiParfum) for deeper phygital experiences.
-        * **❤️ Bienestar y Funcionalidad:**
-            * Report Info: Section II.B for trend description; Section III for major brands' initiatives (Puig's acquisitions like Kama Ayurveda, LVMH's sensorial experiences). Examples: The Nue Co., Edeniste, Øthers, Cosmoss.
-            * Goal: Explain trend, show brand responses.
-            * Viz/Method: Text, bullet points, Unicode icons.
-            * Interaction: Tab switching.
-            * Subtle Puig Nod: Developing functional lines with scientific backing, leveraging brand-building expertise.
-        * **✨ Personalización a Gran Escala:**
-            * Report Info: Section II.A for trend description; Section III for major brands' initiatives (Puig's WikiParfum data, LVMH/Chanel/Hermès personalized retail, L'Oréal/ELC AI tools). Examples: NINU, Perfumérica, layering.
-            * Goal: Explain trend, show brand responses.
-            * Viz/Method: Text, bullet points, Unicode icons.
-            * Interaction: Tab switching.
-            * Subtle Puig Nod: Using data for semi-custom offers, luxury layering kits.
-    **3. Conclusión:**
-        * Report Info: Section IV.
-        * Goal: Summarize strategic implications.
-        * Viz/Method: Text.
-    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. Canvas for charts (Chart.js), HTML/CSS/Tailwind/Unicode for icons.
-    -->
     <style>
         .chart-container { position: relative; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto; height: 280px; max-height: 350px; }
         @media (min-width: 768px) { .chart-container { height: 300px; } }
@@ -78,6 +25,47 @@
         h3.section-title { font-size: 1.85rem; font-weight: 700; color: #065f46; margin-bottom: 0.75rem; text-align: center; }
         p.section-subtitle { text-align: center; color: #374151; margin-bottom: 2rem; max-width: 3xl; margin-left: auto; margin-right: auto;}
         .subtle-puig-nod { margin-top: 1rem; padding: 0.75rem; background-color: #f0fdf4; border-left: 3px solid #22c55e; font-size: 0.9rem; color: #14532d; }
+        .contact-section {
+            background-color: #f7f7f7;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
+        }
+        .contact-section label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .contact-section input[type="text"],
+        .contact-section input[type="email"],
+        .contact-section textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 0.375rem;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+        .contact-section textarea {
+            min-height: 100px;
+        }
+        .contact-section button {
+            background-color: #059669;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s ease;
+        }
+        .contact-section button:hover {
+            background-color: #047857;
+        }
     </style>
 </head>
 <body class="bg-orange-50 text-stone-800 font-sans leading-relaxed">
@@ -151,7 +139,7 @@
                         <li><span class="brand-highlight">LVMH:</span> A través de su programa LIFE 360, implementa diseño circular, agricultura regenerativa y busca el 100% de energía renovable en sus operaciones.</li>
                         <li><span class="brand-highlight">Estée Lauder Companies (ELC):</span> El 76% de sus envases cumple con las "5 Rs", aumentando los rellenables y utilizando electricidad 100% renovable en campus clave como el de Oevel.</li>
                         <li><span class="brand-highlight">CHANEL:</span> Comprometida con Net-Zero para 2040, utiliza vidrio reciclado (ej. <span class="italic">Les Eaux de Chanel</span>) y promueve la agricultura regenerativa para sus materias primas.</li>
-                         <li><span class="brand-highlight">Hermès:</span> Se enfoca en la durabilidad, materiales innovadores y trazabilidad, usando tintas vegetales y envases reciclados/rellenables.</li>
+                        <li><span class="brand-highlight">Hermès:</span> Se enfoca en la durabilidad, materiales innovadores y trazabilidad, usando tintas vegetales y envases reciclados/rellenables.</li>
                         <li><strong class="brand-highlight">Innovaciones en Ingredientes:</strong> <span class="italic">DSM-Firmenich</span> con Clearwood (pachulí de fermentación) y Dreamwood (sándalo biotecnológico).</li>
                     </ul>
                     <h5 class="font-semibold text-emerald-600 text-lg mb-2">Perspectiva y Oportunidad:</h5>
@@ -193,7 +181,7 @@
                         <li><span class="brand-highlight">Puig:</span> Su propósito incluye fomentar el bienestar. Adquisiciones como <span class="italic">Kama Ayurveda</span> y <span class="italic">Loto del Sur</span>, enfocadas en bienestar y skincare, se alinean con esta tendencia. Marcas clásicas como <span class="italic">Agua Lavanda Puig</span> ya evocan relajación.</li>
                         <li><span class="brand-highlight">LVMH:</span> Sus Maisons buscan ofrecer experiencias sensoriales que nutran el bienestar (ej. "El Jardín del Perfumista" de Maison Francis Kurkdjian).</li>
                         <li><span class="brand-highlight">L'Oréal:</span> La Maison de Beauté Carita ofrece productos ultra-premium para el bienestar. El Domaine de la Rose de Lancôme protege la biodiversidad.</li>
-                         <li><span class="brand-highlight">Estée Lauder Companies (ELC):</span> Su asociación con Exuud busca mejorar el bienestar y la felicidad a través de experiencias de fragancias inmersivas.</li>
+                        <li><span class="brand-highlight">Estée Lauder Companies (ELC):</span> Su asociación con Exuud busca mejorar el bienestar y la felicidad a través de experiencias de fragancias inmersivas.</li>
                         <li><span class="brand-highlight">Hermès:</span> Ha expandido su oferta a productos para el hogar (velas, sprays) que mejoran el bienestar general.</li>
                     </ul>
                      <h5 class="font-semibold text-emerald-600 text-lg mb-2">Perspectiva y Oportunidad:</h5>
@@ -234,6 +222,23 @@
                     El futuro de la industria de las fragancias es vibrante y lleno de oportunidades. Las tendencias hacia la sostenibilidad, la integración tecnológica, el bienestar funcional y la personalización a gran escala no son modas pasajeras, sino pilares que definirán a los líderes del mañana. Las marcas que logren abrazar estos cambios con agilidad, autenticidad e innovación, invirtiendo en I+D, fomentando la transparencia y conectando genuinamente con las nuevas generaciones de consumidores, estarán mejor posicionadas para prosperar en este apasionante y evolutivo panorama olfativo.
                 </p>
             </div>
+        </section>
+
+        <section class="contact-section">
+            <h2 class="section-title">¡Contáctame!</h2>
+            <p class="text-gray-700 mb-4 leading-relaxed text-center">Si tienes alguna pregunta o simplemente quieres compartir tu opinión, no dudes en ponerte en contacto.</p>
+            <form action="mailto:alegiacomelli@icloud.com" method="post" enctype="text/plain" class="max-w-md mx-auto">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required class="shadow-sm appearance-none border border-gray-300 rounded-md w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-emerald-200 focus:border-emerald-300 transition duration-200">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required class="shadow-sm appearance-none border border-gray-300 rounded-md w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-emerald-200 focus:border-emerald-300 transition duration-200">
+
+                <label for="pregunta">Tu Pregunta:</label>
+                <textarea id="pregunta" name="pregunta" rows="5" required class="shadow-sm appearance-none border border-gray-300 rounded-md w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-emerald-200 focus:border-emerald-300 transition duration-200"></textarea>
+
+                <button type="submit" class="w-full py-3 bg-emerald-500 hover:bg-emerald-700 text-white font-bold rounded-md transition duration-200">Enviar Pregunta</button>
+            </form>
         </section>
     </main>
 
@@ -333,13 +338,13 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        scales: { 
-                            y: { 
-                                beginAtZero: true, 
+                        scales: {
+                            y: {
+                                beginAtZero: true,
                                 title: { display: true, text: 'Miles de Millones USD', font: {size: 10} },
                                 ticks: { font: { size: 10 } }
                             },
-                            x: { ticks: { 
+                            x: { ticks: {
                                 font: { size: 10 },
                                 callback: function(value, index, ticks) {
                                     const labels = ['Valor Mercado 2023', 'Proyección Valor 2031'];
@@ -347,9 +352,9 @@
                                 }
                             }}
                         },
-                        plugins: { 
-                            legend: { display: false }, 
-                            tooltip: { 
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
                                 displayColors: false,
                                 titleFont: { size: 12 },
                                 bodyFont: { size: 11 },
@@ -358,7 +363,7 @@
                                         return context.dataset.label + ': ' + context.parsed.y.toFixed(2);
                                     }
                                 }
-                            } 
+                            }
                         }
                     }
                 });
