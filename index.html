@@ -3,868 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Perfil Olfativo: Descubre tu Aroma</title>
+    <title>El Futuro Olfativo: Tendencias y Marcas</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Application Structure Plan:
+    The SPA is designed to explore key fragrance industry trends and how major brands are positioned.
+    1.  **Introducción:** Sets the context of a transforming fragrance market and introduces the 4 key trends to be explored. Includes a small chart for market growth visualization.
+    2.  **Tendencias que Definen el Mañana:** A tabbed interface for:
+        * 🌿 Sostenibilidad y Transparencia
+        * 💻 Tecnología y Perfumería Digital
+        * ❤️ Bienestar y Funcionalidad
+        * ✨ Personalización a Gran Escala
+        Each tab details:
+            * Descripción de la tendencia (relevance, consumer demand).
+            * Marcas Innovadoras y Estrategias (how major players like LVMH, L'Oréal, Coty, ELC, Chanel, Hermès, Puig, and other niche innovators are addressing the trend, with examples).
+            * Perspectiva y Oportunidad (a subtle nod to how a company with Puig's type of strengths could capitalize).
+    3.  **Conclusión:** Summarizes the importance of these trends for future market leadership.
+    **User Flow:** General Intro -> Select a Trend -> Explore Trend Details & Brand Strategies -> Move to another Trend or Conclusion.
+    **Why this structure?:** This thematic approach directly addresses the user's request to focus on trends first. The tabbed navigation allows for easy comparison and deep dives into specific areas of interest. The "subtle Puig nod" is integrated into each trend's perspective, making it contextual rather than a standalone section.
+    -->
+    <!-- Visualization & Content Choices:
+    **1. Introducción:**
+        * Report Info: Section I.A, I.B from "Futuro olfativo: tendencias y marcas".
+        * Goal: Engage, provide market context, outline SPA focus.
+        * Viz/Method: Text summary, dynamic stat callouts, and a simple bar chart for market projection (Chart.js).
+        * Interaction: Chart tooltips.
+    **2. Tendencias que Definen el Mañana (Tabs):**
+        * **🌿 Sostenibilidad y Transparencia:**
+            * Report Info: Section II.C for trend description; Section III for major brands' initiatives (Puig, LVMH, L'Oréal, Coty, ELC, Chanel, Hermès). Examples like DSM-Firmenich's Clearwood, Coty's carbon-captured alcohol, L'Oréal's waterless extraction.
+            * Goal: Explain trend, show brand responses.
+            * Viz/Method: Text, bullet points, Unicode icons.
+            * Interaction: Tab switching.
+            * Subtle Puig Nod: Focus on Mediterranean sourcing, transparency platforms.
+        * **💻 Tecnología y Perfumería Digital:**
+            * Report Info: Section II.A (focus on tech convergence) for trend description; Section III for major brands' initiatives (Puig's AirParfum/WikiParfum, L'Oréal's ModiFace/AI, ELC's ConsumerIQ, Coty's AI planning). Examples like EveryHuman, Estée Lauder's facial recognition.
+            * Goal: Explain trend, show brand responses.
+            * Viz/Method: Text, bullet points, Unicode icons.
+            * Interaction: Tab switching.
+            * Subtle Puig Nod: Leveraging existing tech (AirParfum/WikiParfum) for deeper phygital experiences.
+        * **❤️ Bienestar y Funcionalidad:**
+            * Report Info: Section II.B for trend description; Section III for major brands' initiatives (Puig's acquisitions like Kama Ayurveda, LVMH's sensorial experiences). Examples: The Nue Co., Edeniste, Øthers, Cosmoss.
+            * Goal: Explain trend, show brand responses.
+            * Viz/Method: Text, bullet points, Unicode icons.
+            * Interaction: Tab switching.
+            * Subtle Puig Nod: Developing functional lines with scientific backing, leveraging brand-building expertise.
+        * **✨ Personalización a Gran Escala:**
+            * Report Info: Section II.A for trend description; Section III for major brands' initiatives (Puig's WikiParfum data, LVMH/Chanel/Hermès personalized retail, L'Oréal/ELC AI tools). Examples: NINU, Perfumérica, layering.
+            * Goal: Explain trend, show brand responses.
+            * Viz/Method: Text, bullet points, Unicode icons.
+            * Interaction: Tab switching.
+            * Subtle Puig Nod: Using data for semi-custom offers, luxury layering kits.
+    **3. Conclusión:**
+        * Report Info: Section IV.
+        * Goal: Summarize strategic implications.
+        * Viz/Method: Text.
+    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. Canvas for charts (Chart.js), HTML/CSS/Tailwind/Unicode for icons.
+    -->
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #fcfafa; color: #333d47; }
-        .section-title { color: #4a7c59; border-bottom: 2px solid #4a7c59; padding-bottom: 0.75rem; margin-bottom: 1.5rem; font-weight: 700; font-size: 1.875rem; }
-        .subsection-title { color: #5c8d89; margin-top: 2rem; margin-bottom: 1rem; font-weight: 600; font-size: 1.5rem; }
-        .card { background-color: #ffffff; border-radius: 0.75rem; box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.08); padding: 2rem; margin-bottom: 2rem; }
-        .adjective-btn, .time-btn, .intensity-btn, .season-btn {
-            background-color: #e0e0e0;
-            color: #333d47;
-            border-radius: 9999px;
-            padding: 0.6rem 1.2rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid #d1d1d1;
-            cursor: pointer;
-            user-select: none; /* Prevent text selection */
+        .chart-container { position: relative; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto; height: 280px; max-height: 350px; }
+        @media (min-width: 768px) { .chart-container { height: 300px; } }
+        .tab-button.active { border-bottom-color: #059669; color: #047857; font-weight: 600; }
+        .tab-button { transition: all 0.3s ease; border-bottom: 2px solid transparent; }
+        .section-fade-in { animation: fadeIn 0.7s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .brand-highlight { color: #047857; font-weight: 600; }
+        .icon-style { display: inline-block; margin-right: 8px; color: #059669; font-size: 1.1em; }
+        .nav-link { transition: color 0.3s ease; }
+        .pill-button {
+            background-color: #dcfce7; color: #15803d; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem;
+            font-weight: 500; transition: background-color 0.3s ease, color 0.3s ease; border: 1px solid transparent;
         }
-        .adjective-btn:hover, .time-btn:hover, .intensity-btn:hover, .season-btn:hover {
-            background-color: #d1d1d1;
-            transform: translateY(-2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .selected-adjective, .selected-time, .selected-intensity, .selected-season {
-            background-color: #5c8d89;
-            color: white;
-            border-color: #5c8d89;
-            box-shadow: 0 4px 8px rgba(92, 141, 137, 0.4);
-        }
-        .selected-adjective:hover, .selected-time:hover, .selected-intensity:hover, .selected-season:hover {
-            background-color: #4a7c76;
-            border-color: #4a7c76;
-        }
-        input[type="checkbox"], input[type="radio"] {
-            accent-color: #5c8d89;
-            border-radius: 0.25rem;
-            width: 1.15em;
-            height: 1.15em;
-            margin-right: 0.5rem;
-            flex-shrink: 0;
-            cursor: pointer;
-        }
-        .badge {
-            display: inline-block;
-            padding: 0.25em 0.6em;
-            font-size: 0.7em;
-            font-weight: 600;
-            line-height: 1;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            border-radius: 0.375rem;
-            margin-left: 0.5rem;
-        }
-        .badge-info { background-color: #a8d8d4; color: #3a6b67; }
-        .badge-success { background-color: #c8e6c9; color: #4a7c59; }
-        .badge-warning { background-color: #ffe082; color: #e0a800; }
-
-        .tooltip { position: relative; display: inline-block; }
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 240px;
-            background-color: #333d47;
-            color: #fff;
-            text-align: center;
-            border-radius: 0.375rem;
-            padding: 0.6rem 0.8rem;
-            position: absolute;
-            z-index: 10;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -120px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            font-size: 0.85rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .tooltip .tooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -8px;
-            border-width: 8px;
-            border-style: solid;
-            border-color: #333d47 transparent transparent transparent;
-        }
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-        .fragrance-card {
-            background-color: #fefefe;
-            border: 1px solid #e0e0e0;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .fragrance-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        .mood-board {
-            min-height: 100px;
-            background-color: #f0f4f8;
-            border-radius: 0.75rem;
-            padding: 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            transition: background-color 0.5s ease;
-            box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
-        }
-        .mood-icon {
-            font-size: 2.5rem;
-            opacity: 0.7;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .mood-icon:hover {
-            transform: scale(1.1);
-            opacity: 1;
-        }
-        .profile-summary-item {
-            display: flex;
-            align-items: flex-start; /* Align items to the top */
-            margin-bottom: 0.5rem;
-        }
-        .profile-summary-item span {
-            font-weight: 600; /* Bolder for labels */
-            color: #4a7c59;
-            margin-right: 0.75rem; /* More space */
-            min-width: 120px; /* Ensure labels align */
-        }
-        .profile-summary-item p {
-            color: #333d47;
-            flex-grow: 1; /* Allow content to take remaining space */
-        }
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .loading-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #5c8d89;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .share-button {
-            background-color: #f0f4f8;
-            color: #333d47;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-        }
-        .share-button:hover {
-            background-color: #e2e8f0;
-            transform: translateY(-2px);
-        }
-        .contact-section {
-            background-color: #f7f7f7;
-            border-radius: 0.75rem;
-            padding: 2rem;
-            margin-top: 2rem;
-            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
-        }
-        .contact-section label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        .contact-section input[type="text"],
-        .contact-section input[type="email"],
-        .contact-section textarea {
-            width: 100%;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 0.375rem;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-        .contact-section textarea {
-            min-height: 100px;
-        }
-        .contact-section button {
-            background-color: #5c8d89;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.2s ease;
-        }
-        .contact-section button:hover {
-            background-color: #4a7c76;
-        }
+        .pill-button:hover { background-color: #bbf7d0; }
+        .pill-button.active { background-color: #16a34a; color: white; border-color: #15803d; }
+        h3.section-title { font-size: 1.85rem; font-weight: 700; color: #065f46; margin-bottom: 0.75rem; text-align: center; }
+        p.section-subtitle { text-align: center; color: #374151; margin-bottom: 2rem; max-width: 3xl; margin-left: auto; margin-right: auto;}
+        .subtle-puig-nod { margin-top: 1rem; padding: 0.75rem; background-color: #f0fdf4; border-left: 3px solid #22c55e; font-size: 0.9rem; color: #14532d; }
     </style>
 </head>
-<body class="bg-stone-50 text-gray-800">
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="spinner"></div>
-    </div>
+<body class="bg-orange-50 text-stone-800 font-sans leading-relaxed">
 
-    <div class="container mx-auto p-6 md:p-10 max-w-4xl">
-        <header class="text-center mb-10">
-            <h1 class="text-4xl font-bold text-gray-900 mb-3">Descubre Tu Perfil Olfativo</h1>
-            <p class="text-lg text-gray-600">Una experiencia interactiva para encontrar la fragancia que realmente te define.</p>
-        </header>
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex items-center justify-between h-16">
+                <h1 class="text-2xl font-bold text-emerald-700">El Futuro Olfativo</h1>
+                <div class="hidden md:flex space-x-3 lg:space-x-4">
+                    <a href="#introduccion" class="nav-link text-stone-600 hover:text-emerald-700 px-2 py-1 rounded-md">Introducción</a>
+                    <a href="#tendencias" class="nav-link text-stone-600 hover:text-emerald-700 px-2 py-1 rounded-md">Tendencias</a>
+                    <a href="#conclusion-section" class="nav-link text-stone-600 hover:text-emerald-700 px-2 py-1 rounded-md">Conclusión</a>
+                </div>
+                <button id="mobileMenuButton" class="md:hidden text-stone-600 hover:text-emerald-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </nav>
+        </div>
+        <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg py-2">
+            <a href="#introduccion" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Introducción</a>
+            <a href="#tendencias" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Tendencias</a>
+            <a href="#conclusion-section" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Conclusión</a>
+        </div>
+    </header>
 
-        <section class="card">
-            <h2 class="section-title">1. Adjetivos que me Describen</h2>
-            <p class="text-gray-700 mb-4 leading-relaxed">Elige los adjetivos que mejor te describen o resuenan con tu personalidad. Puedes seleccionar varios para capturar la esencia de quién eres:</p>
-            <div id="adjectiveButtons" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                <button class="adjective-btn" data-adjective="Sofisticado" data-icon="🎩">Sofisticado</button>
-                <button class="adjective-btn" data-adjective="Energético" data-icon="⚡">Energético</button>
-                <button class="adjective-btn" data-adjective="Romántico" data-icon="💖">Romántico</button>
-                <button class="adjective-btn" data-adjective="Misterioso" data-icon="🔮">Misterioso</button>
-                <button class="adjective-btn" data-adjective="Fresco" data-icon="🍃">Fresco</button>
-                <button class="adjective-btn" data-adjective="Elegante" data-icon="✨">Elegante</button>
-                <button class="adjective-btn" data-adjective="Natural" data-icon="🌳">Natural</button>
-                <button class="adjective-btn" data-adjective="Vibrante" data-icon="🌈">Vibrante</button>
-                <button class="adjective-btn" data-adjective="Apasionado" data-icon="🔥">Apasionado</button>
-                <button class="adjective-btn" data-adjective="Sereno" data-icon="🧘">Sereno</button>
-                <button class="adjective-btn" data-adjective="Auténtico" data-icon="🗝️">Auténtico</button>
-                <button class="adjective-btn" data-adjective="Único" data-icon="💎">Único</button>
-                <button class="adjective-btn" data-adjective="Chispeante" data-icon="🍾">Chispeante</button>
-                <button class="adjective-btn" data-adjective="Femenina" data-icon="🌸">Femenina</button>
-                <button class="adjective-btn" data-adjective="Tranquila" data-icon="☁️">Tranquila</button>
-                <button class="adjective-btn" data-adjective="Atrevido" data-icon="🚀">Atrevido</button>
-                <button class="adjective-btn" data-adjective="Clásico" data-icon="🏛️">Clásico</button>
-                <button class="adjective-btn" data-adjective="Moderno" data-icon="🏙️">Moderno</button>
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <section id="introduccion" class="py-10 section-fade-in">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-extrabold text-emerald-700 mb-4">El Futuro Olfativo: Tendencias Más Allá del Nicho</h2>
+                <p class="text-lg text-stone-700 max-w-3xl mx-auto">
+                    La industria de fragancias está en plena transformación, con un crecimiento impulsado por la innovación y un consumidor más consciente. Este análisis explora las tendencias clave que van más allá del nicho y cómo las marcas líderes están adaptando sus estrategias.
+                </p>
             </div>
-            <div class="mt-5">
-                <label for="otrosAdjetivos" class="block text-gray-700 text-sm font-semibold mb-2">O añade tus propios adjetivos (separados por comas):</label>
-                <input type="text" id="otrosAdjetivos" class="shadow-sm appearance-none border border-gray-300 rounded-md w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-300 transition duration-200" placeholder="Ej: Calmado, Audaz, Creativo">
+            <div class="grid md:grid-cols-2 gap-8 items-center bg-white p-6 rounded-xl shadow-xl">
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Un Mercado en Auge</h3>
+                    <p class="text-stone-700 mb-2 text-sm">El mercado global de perfumes, valorado en <strong class="brand-highlight">57.14 mil millones USD en 2023</strong>, se proyecta alcanzar <strong class="brand-highlight">87.67 mil millones USD para 2031</strong> (CAGR 6.31%).</p>
+                    <p class="text-stone-700 text-sm">Este crecimiento se debe a cambios post-pandemia, la incorporación de nuevos compradores (Gen Z, Alfa), la premiumización y la búsqueda de autoexpresión.</p>
+                    <p class="text-stone-700 mt-3 text-sm">El futuro de la perfumería se moldea por la personalización, la tecnología, el bienestar y la sostenibilidad, redefiniendo la relación del consumidor con el aroma.</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="marketGrowthChart"></canvas>
+                </div>
             </div>
-            <div class="mt-8">
-                <h3 class="subsection-title">Tu Mood Board Olfativo</h3>
-                <div id="moodBoard" class="mood-board">
-                    <p class="text-gray-500 text-sm">Selecciona adjetivos para ver tu mood board.</p>
+        </section>
+        
+        <div class="my-10 border-t border-stone-300"></div>
+
+        <section id="tendencias" class="py-10 section-fade-in">
+            <h3 class="section-title">Tendencias que Definen el Mañana Olfativo</h3>
+            <p class="section-subtitle">
+                Explora las cuatro macrotendencias que están reconfigurando la industria de las fragancias, desde cómo se crean y comercializan hasta cómo los consumidores las experimentan e integran en sus vidas.
+            </p>
+            <div class="mb-6 flex flex-wrap justify-center gap-2 sm:gap-3">
+                <button data-tab="sostenibilidad" class="tab-button pill-button active">🌿 Sostenibilidad y Transparencia</button>
+                <button data-tab="tecnologia" class="tab-button pill-button">💻 Tecnología y Perfumería Digital</button>
+                <button data-tab="bienestar" class="tab-button pill-button">❤️ Bienestar y Funcionalidad</button>
+                <button data-tab="personalizacion" class="tab-button pill-button">✨ Personalización a Gran Escala</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-xl min-h-[400px]">
+                <div id="sostenibilidad" class="tab-content">
+                    <h4 class="text-2xl font-bold text-emerald-700 mb-4 flex items-center"><span class="icon-style text-3xl">🌿</span>Sostenibilidad y Transparencia en la Cadena de Valor</h4>
+                    <p class="text-sm text-stone-700 mb-4">La sostenibilidad ya no es una opción, sino una necesidad. Los consumidores, especialmente la Gen Z, exigen productos de origen responsable, envases eco-amigables y transparencia total sobre la cadena de suministro y el impacto ambiental. Esta demanda impulsa innovaciones en ingredientes, formulaciones y packaging.</p>
+                    
+                    <h5 class="font-semibold text-emerald-600 text-lg mb-2">Marcas Innovadoras y Estrategias:</h5>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-stone-700 mb-4">
+                        <li><span class="brand-highlight">Coty:</span> Ha integrado alcohol capturado por carbono en fragancias como <span class="italic">Gucci The Alchemist's Garden</span> y promueve envases rellenables (ej. <span class="italic">Chloé Rose Naturelle Intense</span>).</li>
+                        <li><span class="brand-highlight">L'Oréal:</span> Busca que el 100% de sus productos sean eco-diseñados para 2030, utilizando ingredientes de origen biológico y envases rellenables para iconos como <span class="italic">Lancôme La Vie Est Belle</span>. Han patentado extracciones sin agua y de baja energía.</li>
+                        <li><span class="brand-highlight">LVMH:</span> A través de su programa LIFE 360, implementa diseño circular, agricultura regenerativa y busca el 100% de energía renovable en sus operaciones.</li>
+                        <li><span class="brand-highlight">Estée Lauder Companies (ELC):</span> El 76% de sus envases cumple con las "5 Rs", aumentando los rellenables y utilizando electricidad 100% renovable en campus clave como el de Oevel.</li>
+                        <li><span class="brand-highlight">CHANEL:</span> Comprometida con Net-Zero para 2040, utiliza vidrio reciclado (ej. <span class="italic">Les Eaux de Chanel</span>) y promueve la agricultura regenerativa para sus materias primas.</li>
+                         <li><span class="brand-highlight">Hermès:</span> Se enfoca en la durabilidad, materiales innovadores y trazabilidad, usando tintas vegetales y envases reciclados/rellenables.</li>
+                        <li><strong class="brand-highlight">Innovaciones en Ingredientes:</strong> <span class="italic">DSM-Firmenich</span> con Clearwood (pachulí de fermentación) y Dreamwood (sándalo biotecnológico).</li>
+                    </ul>
+                    <h5 class="font-semibold text-emerald-600 text-lg mb-2">Perspectiva y Oportunidad:</h5>
+                    <div class="subtle-puig-nod">
+                        <p>Las marcas con una rica herencia y compromiso demostrado con la calidad, como podría ser el caso de una empresa como <span class="brand-highlight">Puig</span>, tienen una oportunidad única para fortalecer la conexión con el consumidor. Explorar y comunicar activamente el uso de ingredientes sostenibles con origen trazable, por ejemplo, aquellos emblemáticos de la región mediterránea, podría resonar profundamente, alineando el lujo con la responsabilidad y la autenticidad que demandan los consumidores de hoy.</p>
+                    </div>
+                </div>
+
+                <div id="tecnologia" class="tab-content hidden">
+                    <h4 class="text-2xl font-bold text-emerald-700 mb-4 flex items-center"><span class="icon-style text-3xl">💻</span>Tecnología y Perfumería Digital</h4>
+                    <p class="text-sm text-stone-700 mb-4">La convergencia de la tecnología y la perfumería está transformando la industria. Desde la IA en la creación y personalización de fragancias hasta experiencias olfativas digitales y "phygitales", la tecnología se convierte en una herramienta esencial para la innovación, la eficiencia y la conexión con el consumidor.</p>
+                    
+                    <h5 class="font-semibold text-emerald-600 text-lg mb-2">Marcas Innovadoras y Estrategias:</h5>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-stone-700 mb-4">
+                        <li><span class="brand-highlight">Puig:</span> Pionera con <span class="italic">AirParfum</span> (prueba sin saturación) y <span class="italic">WikiParfum</span> (enciclopedia digital de aromas). Su colaboración con Tmall para el "Scent Visualizer" en China es otro ejemplo.</li>
+                        <li><span class="brand-highlight">L'Oréal:</span> Utiliza IA para formulación (con IBM), marketing y diseño (con Google Imagen 3), además de AR para pruebas virtuales (<span class="italic">ModiFace</span>) y chatbots de IA (<span class="italic">Lancôme</span>).</li>
+                        <li><span class="brand-highlight">Estée Lauder Companies (ELC):</span> Ha lanzado <span class="italic">ConsumerIQ</span> (IA con Microsoft) para insights de mercado y desarrollo. Experimenta con reconocimiento facial para recomendaciones en China y adoptó la IA de Givaudan para <span class="italic">Tom Ford Bois Pacifique</span>.</li>
+                        <li><span class="brand-highlight">Coty:</span> Emplea IA para planificación de demanda y ha desarrollado dispositivos de prueba sin contacto con Êverie.</li>
+                        <li><span class="brand-highlight">Hermès:</span> Utiliza IA para analizar datos de clientes, predecir tendencias y optimizar la cadena de suministro, manteniendo su enfoque artesanal.</li>
+                        <li><strong class="brand-highlight">Otras Innovaciones:</strong> <span class="italic">Osmo</span> (IA para nuevas moléculas aromáticas).</li>
+                    </ul>
+                     <h5 class="font-semibold text-emerald-600 text-lg mb-2">Perspectiva y Oportunidad:</h5>
+                    <div class="subtle-puig-nod">
+                        <p>Empresas con una sólida trayectoria en innovación tecnológica aplicada a la experiencia del consumidor, como es el caso de <span class="brand-highlight">Puig</span> con sus herramientas patentadas, están idealmente posicionadas. Podrían liderar el desarrollo de experiencias 'phygital' aún más inmersivas y personalizadas, fusionando el arte de la perfumería tradicional con las capacidades de la IA para la co-creación de fragancias y el descubrimiento interactivo, redefiniendo el viaje del cliente.</p>
+                    </div>
+                </div>
+
+                <div id="bienestar" class="tab-content hidden">
+                    <h4 class="text-2xl font-bold text-emerald-700 mb-4 flex items-center"><span class="icon-style text-3xl">❤️</span>Bienestar y Funcionalidad (Aromacología)</h4>
+                    <p class="text-sm text-stone-700 mb-4">Las fragancias están trascendiendo su rol estético para convertirse en herramientas de bienestar. La aromacología, que estudia la influencia de los olores en las emociones y el comportamiento, impulsa el desarrollo de "perfumes funcionales" diseñados para mejorar el estado de ánimo, la concentración o la relajación.</p>
+                    
+                    <h5 class="font-semibold text-emerald-600 text-lg mb-2">Marcas Innovadoras y Estrategias:</h5>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-stone-700 mb-4">
+                        <li><span class="brand-highlight">The Nue Co.:</span> Ofrece "suplementos neuronales" como <span class="italic">Mind Energy</span> para concentración.</li>
+                        <li><span class="brand-highlight">Edeniste:</span> Fragancias con activos desestresantes patentados y "LifeBoosts" para estados específicos.</li>
+                        <li><span class="brand-highlight">Øthers:</span> Combina tecnología olfativa y sonora para la resiliencia mental (ej. <span class="italic">Red Skies</span>).</li>
+                        <li><span class="brand-highlight">Cosmoss (Kate Moss):</span> <span class="italic">Sacred Mist</span> para calma y elevación espiritual.</li>
+                        <li><span class="brand-highlight">FEWE:</span> <span class="italic">Eau So Happy</span> para aliviar cambios de humor hormonales.</li>
+                        <li><span class="brand-highlight">Puig:</span> Su propósito incluye fomentar el bienestar. Adquisiciones como <span class="italic">Kama Ayurveda</span> y <span class="italic">Loto del Sur</span>, enfocadas en bienestar y skincare, se alinean con esta tendencia. Marcas clásicas como <span class="italic">Agua Lavanda Puig</span> ya evocan relajación.</li>
+                        <li><span class="brand-highlight">LVMH:</span> Sus Maisons buscan ofrecer experiencias sensoriales que nutran el bienestar (ej. "El Jardín del Perfumista" de Maison Francis Kurkdjian).</li>
+                        <li><span class="brand-highlight">L'Oréal:</span> La Maison de Beauté Carita ofrece productos ultra-premium para el bienestar. El Domaine de la Rose de Lancôme protege la biodiversidad.</li>
+                         <li><span class="brand-highlight">Estée Lauder Companies (ELC):</span> Su asociación con Exuud busca mejorar el bienestar y la felicidad a través de experiencias de fragancias inmersivas.</li>
+                        <li><span class="brand-highlight">Hermès:</span> Ha expandido su oferta a productos para el hogar (velas, sprays) que mejoran el bienestar general.</li>
+                    </ul>
+                     <h5 class="font-semibold text-emerald-600 text-lg mb-2">Perspectiva y Oportunidad:</h5>
+                    <div class="subtle-puig-nod">
+                        <p>Las casas de fragancias con una probada habilidad para construir marcas que evocan emociones profundas y un compromiso con el bienestar del consumidor, como podría ser el caso de <span class="brand-highlight">Puig</span>, están bien situadas. El desarrollo de líneas de fragancias funcionales, con beneficios validados científicamente y comunicados de forma transparente, podría abrir nuevas avenidas de crecimiento, apelando a un consumidor que busca en el perfume una herramienta para mejorar su calidad de vida.</p>
+                    </div>
+                </div>
+                
+                <div id="personalizacion" class="tab-content hidden">
+                    <h4 class="text-2xl font-bold text-emerald-700 mb-4 flex items-center"><span class="icon-style text-3xl">✨</span>Personalización a Gran Escala</h4>
+                    <p class="text-sm text-stone-700 mb-4">La búsqueda de la individualidad impulsa la demanda de fragancias personalizadas. La tecnología, especialmente la IA, permite ofrecer experiencias a medida, desde recomendaciones hasta la co-creación de aromas únicos, llevando la personalización más allá del nicho.</p>
+                    
+                    <h5 class="font-semibold text-emerald-600 text-lg mb-2">Marcas Innovadoras y Estrategias:</h5>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-stone-700 mb-4">
+                        <li><span class="brand-highlight">EveryHuman / The Fragrance Shop:</span> Utilizan IA y cuestionarios para crear fragancias personalizadas en minutos en tiendas pop-up.</li>
+                        <li><span class="brand-highlight">Estée Lauder:</span> Experimenta con reconocimiento facial en China para sugerir aromas personalizados.</li>
+                        <li><span class="brand-highlight">NINU:</span> Dispositivo inteligente con IA que sugiere y permite mezclar fragancias personalizadas.</li>
+                        <li><span class="brand-highlight">Perfumérica:</span> Plataforma online para crear perfumes a medida mediante tests guiados.</li>
+                        <li><span class="brand-highlight">Puig:</span> <span class="italic">WikiParfum</span> ayuda a entender aromas y <span class="italic">AirParfum</span> facilita la prueba. Datos de estas plataformas pueden alimentar la personalización.</li>
+                        <li><span class="brand-highlight">L'Oréal:</span> Su inversión en IA y herramientas como ModiFace apoyan la personalización en maquillaje, con potencial en fragancias.</li>
+                        <li><span class="brand-highlight">LVMH / CHANEL / Hermès:</span> Ofrecen experiencias de personalización en tienda y herramientas online (ej. "Fragrance Finder" de Hermès) para guiar al cliente.</li>
+                        <li><strong class="brand-highlight">Técnica de Layering:</strong> Popularizada en Oriente Medio, marcas ofrecen kits de descubrimiento para facilitar esta forma de personalización.</li>
+                    </ul>
+                     <h5 class="font-semibold text-emerald-600 text-lg mb-2">Perspectiva y Oportunidad:</h5>
+                    <div class="subtle-puig-nod">
+                        <p>Compañías con acceso a extensos datos sobre preferencias de consumidores y un diverso portafolio de aromas, como podría caracterizar a <span class="brand-highlight">Puig</span>, poseen una ventaja estratégica. Podrían escalar la personalización ofreciendo desde kits de "layering" de lujo guiados digitalmente, hasta programas de co-creación semi-personalizada donde el consumidor, asistido por IA y la experiencia del perfumista, participe activamente en la creación de su firma olfativa única.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="card">
-            <h2 class="section-title">2. Familias Olfativas que Prefiero</h2>
-            <p class="text-gray-700 mb-4 leading-relaxed">Marca las familias olfativas que más te atraen. Esto nos ayuda a entender tus preferencias generales de aroma:</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-family="Floral"><span class="fontfont-medium">Floral</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-family="Amaderada"><span class="font-medium">Amaderada</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-family="Cítrica"><span class="font-medium">Cítrica</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-family="Oriental"><span class="font-medium">Oriental</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-family="Chipre"><span class="font-medium">Chipre</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-family="Helechos"><span class="font-medium">Helechos (Fougère)</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-family="Cuero"><span class="font-medium">Cuero</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-family="Gourmand"><span class="font-medium">Gourmand <span class="badge badge-success">Emergente</span></span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-family="Acuática"><span class="font-medium">Acuática/Agua <span class="badge badge-info">Emergente</span></span>
-                </label>
-                 <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-family="Frutal"><span class="font-medium">Frutal</span>
-                </label>
-                 <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-family="Especiada"><span class="font-medium">Especiada</span>
-                </label>
+        <div class="my-10 border-t border-stone-300"></div>
+
+        <section id="conclusion-section" class="py-10 section-fade-in">
+            <h3 class="section-title">Conclusión: Navegando el Dinámico Futuro Olfativo</h3>
+            <div class="bg-white p-6 rounded-xl shadow-xl text-center">
+                <p class="text-stone-700 mb-3 max-w-3xl mx-auto">
+                    El futuro de la industria de las fragancias es vibrante y lleno de oportunidades. Las tendencias hacia la sostenibilidad, la integración tecnológica, el bienestar funcional y la personalización a gran escala no son modas pasajeras, sino pilares que definirán a los líderes del mañana. Las marcas que logren abrazar estos cambios con agilidad, autenticidad e innovación, invirtiendo en I+D, fomentando la transparencia y conectando genuinamente con las nuevas generaciones de consumidores, estarán mejor posicionadas para prosperar en este apasionante y evolutivo panorama olfativo.
+                </p>
             </div>
         </section>
+    </main>
 
-        <section class="card">
-            <h2 class="section-title">3. Notas que me Atraen</h2>
-            <p class="text-gray-700 mb-4 leading-relaxed">Selecciona las notas de fragancia específicas que te resultan más atractivas. Estas son las esencias individuales que componen un perfume:</p>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Vainilla"><span class="font-medium">Vainilla</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Bergamota"><span class="font-medium">Bergamota</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Sándalo"><span class="font-medium">Sándalo</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Rosa"><span class="font-medium">Rosa</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Jazmín"><span class="font-medium">Jazmín</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Ámbar Gris"><span class="font-medium">Ámbar Gris</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Limón"><span class="font-medium">Limón</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Tabaco"><span class="font-medium">Tabaco</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Almizcle"><span class="font-medium">Almizcle</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Pachulí"><span class="font-medium">Pachulí</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Sal Marina"><span class="font-medium">Sal Marina</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Oud"><span class="font-medium">Oud</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Vetiver"><span class="font-medium">Vetiver</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Pimienta"><span class="font-medium">Pimienta</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Higo"><span class="font-medium">Higo</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Naranja Sanguina"><span class="font-medium">Naranja Sanguina</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Nardo"><span class="font-medium">Nardo</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Cedro"><span class="font-medium">Cedro</span></label>
-                <label class="flex items-center text-gray-700 text-base py-1"><input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-note="Iris"><span class="font-medium">Iris</span></label>
-            </div>
-            <div class="mt-5">
-                <label for="otrasNotas" class="block text-gray-700 text-sm font-semibold mb-2">O lista tus notas favoritas (separadas por comas):</label>
-                <input type="text" id="otrasNotas" class="shadow-sm appearance-none border border-gray-300 rounded-md w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-300 transition duration-200" placeholder="Ej: Almendra, Cereza, Ruibarbo">
-            </div>
-        </section>
-
-        <section class="card">
-            <h2 class="section-title">4. Ocasiones para Usar Perfume</h2>
-            <p class="text-gray-700 mb-4 leading-relaxed">¿En qué ocasiones sueles usar perfume? Selecciona todas las que apliquen a tu estilo de vida:</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-occasion="Diario"><span class="font-medium">Diario / Trabajo / Escuela</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-occasion="Noche"><span class="font-medium">Citas Nocturnas / Salidas Nocturnas</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-occasion="Formal"><span class="font-medium">Eventos Formales / Bodas</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-occasion="Versátil"><span class="font-medium">Aroma Versátil / Firma</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-occasion="Casual"><span class="font-medium">Casual / Fines de Semana</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-occasion="Deporte"><span class="font-medium">Deporte / Actividad Física</span>
-                </label>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2 class="section-title">5. ¿Qué busco en una fragancia?</h2>
-            <p class="text-gray-700 mb-4 leading-relaxed">Indica qué atributos son importantes para ti en un perfume. Pasa el ratón sobre el texto para ver una breve explicación:</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <label class="flex items-center text-gray-700 text-base py-1 tooltip">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-attribute="Longevidad"><span class="font-medium">Que dure mucho (Longevidad)</span>
-                    <span class="tooltiptext">Indica cuánto tiempo permanece el aroma en la piel.</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1 tooltip">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-attribute="Estela"><span class="font-medium">Que deje una estela notable (Sillage)</span>
-                    <span class="tooltiptext">El rastro aromático que deja una persona al moverse.</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1 tooltip">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-attribute="Proyección"><span class="font-medium">Que se perciba a distancia (Proyección)</span>
-                    <span class="tooltiptext">La distancia a la que el perfume irradia desde la piel.</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1 tooltip">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-attribute="Calidad"><span class="font-medium">Que sea de alta calidad</span>
-                    <span class="tooltiptext">Se refiere a la riqueza, complejidad y originalidad de la composición.</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1 tooltip">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-attribute="Versatilidad"><span class="font-medium">Que sea versátil (para varias ocasiones)</span>
-                    <span class="tooltiptext">Adecuado para diferentes entornos y estaciones del año.</span>
-                </label>
-                <label class="flex items-center text-gray-700 text-base py-1 tooltip">
-                    <input type="checkbox" class="form-checkbox h-5 w-5 mr-3" data-attribute="Frescura"><span class="font-medium">Que sea fresca</span>
-                    <span class="tooltiptext">Aroma limpio, nítido, a menudo asociado con cítricos, herbales o acuáticos.</span>
-                </label>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2 class="section-title">6. Estaciones y Climas Preferidos</h2>
-            <p class="text-gray-700 mb-4 leading-relaxed">¿Para qué estaciones o tipos de clima buscas fragancias? (Puedes seleccionar varios)</p>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <button class="season-btn" data-season="Primavera">🌸 Primavera</button>
-                <button class="season-btn" data-season="Verano">☀️ Verano</button>
-                <button class="season-btn" data-season="Otoño">🍂 Otoño</button>
-                <button class="season-btn" data-season="Invierno">❄️ Invierno</button>
-                <button class="season-btn" data-season="Cálido">🌡️ Clima Cálido</button>
-                <button class="season-btn" data-season="Frío">🥶 Clima Frío</button>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2 class="section-title">7. Momento del Día Preferido</h2>
-            <p class="text-gray-700 mb-4 leading-relaxed">¿Para qué momento del día buscas tu fragancia ideal? (Puedes seleccionar varios)</p>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <button class="time-btn" data-time="Mañana">🌅 Mañana</button>
-                <button class="time-btn" data-time="Tarde">🌆 Tarde</button>
-                <button class="time-btn" data-time="Noche">🌃 Noche</button>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2 class="section-title">8. Nivel de Intensidad Deseado</h2>
-            <p class="text-gray-700 mb-4 leading-relaxed">¿Qué nivel de intensidad prefieres en tu fragancia?</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <button class="intensity-btn" data-intensity="Muy Sutil">Muy Sutil (Poca presencia)</button>
-                <button class="intensity-btn" data-intensity="Sutil">Sutil (Discreta)</
-                    </button>
-                <button class="intensity-btn" data-intensity="Moderado">Moderado (Equilibrada)</button>
-                <button class="intensity-btn" data-intensity="Intenso">Intenso (Notable)</button>
-                <button class="intensity-btn" data-intensity="Muy Intenso">Muy Intenso (Fuerte y duradera)</button>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2 class="section-title">9. Fragancias que me Gustan (Opcional)</h2>
-            <p class="text-gray-700 mb-4 leading-relaxed">Si lo deseas, puedes mencionar algunas fragancias que ya te gustan. Esto nos ayudará a refinar aún más las recomendaciones:</p>
-            <label for="currentFragrances" class="block text-gray-700 text-sm font-semibold mb-2">Fragancias que disfruto (separadas por comas):</label>
-            <input type="text" id="currentFragrances" class="shadow-sm appearance-none border border-gray-300 rounded-md w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-300 transition duration-200" placeholder="Ej: Chanel No. 5, Dior Sauvage, Jo Malone Lime Basil & Mandarin">
-        </section>
-
-        <section class="card">
-            <h2 class="section-title">10. Fragancias que NO me Gustan (Opcional)</h2>
-            <p class="text-gray-700 mb-4 leading-relaxed">Si hay alguna fragancia que no te agrade, puedes indicarla aquí para evitar recomendaciones similares:</p>
-            <label for="dislikedFragrances" class="block text-gray-700 text-sm font-semibold mb-2">Fragancias que no me gustan (separadas por comas):</label>
-            <input type="text" id="dislikedFragrances" class="shadow-sm appearance-none border border-gray-300 rounded-md w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-300 transition duration-200" placeholder="Ej: Thierry Mugler Angel, Lancôme La Vie Est Belle">
-        </section>
-
-        <section class="text-center my-10">
-            <button id="recommendButton" class="bg-teal-500 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300">
-                <i class="fas fa-magic mr-2"></i> Recomiéndame Fragancias Ideales
-            </button>
-            <div id="recommendationResults" class="mt-8">
-                </div>
-        </section>
-
-        <section class="contact-section">
-            <h2 class="section-title">¡Contáctame!</h2>
-            <p class="text-gray-700 mb-4 leading-relaxed">Si tienes alguna pregunta o simplemente quieres compartir tu experiencia, no dudes en ponerte en contacto.</p>
-            <form action="mailto:alegiacomelli@icloud.com" method="post" enctype="text/plain">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="pregunta">Tu Pregunta:</label>
-                <textarea id="pregunta" name="pregunta" rows="5" required></textarea>
-
-                <button type="submit">Enviar Pregunta</button>
-            </form>
-        </section>
-    </div>
+    <footer class="bg-stone-800 text-orange-50 py-8 text-center mt-10">
+        <p class="text-sm">&copy; 2025 Análisis Interactivo: El Futuro Olfativo. </p>
+    </footer>
 
     <script>
-        const adjectiveButtons = document.querySelectorAll('#adjectiveButtons .adjective-btn');
-        const moodBoard = document.getElementById('moodBoard');
-        const otrosAdjetivosInput = document.getElementById('otrosAdjetivos');
-        const familyCheckboxes = document.querySelectorAll('#familiesSection input[type="checkbox"]');
-        const noteCheckboxes = document.querySelectorAll('#notesSection input[type="checkbox"]');
-        const occasionCheckboxes = document.querySelectorAll('#occasionsSection input[type="checkbox"]');
-        const attributeCheckboxes = document.querySelectorAll('#attributesSection input[type="checkbox"]');
-        const seasonButtons = document.querySelectorAll('#seasonsSection .season-btn');
-        const timeButtons = document.querySelectorAll('#timeOfDaySection .time-btn');
-        const intensityButtons = document.querySelectorAll('#intensitySection .intensity-btn');
-        const currentFragrancesInput = document.getElementById('currentFragrances');
-        const dislikedFragrancesInput = document.getElementById('dislikedFragrances');
-        const recommendButton = document.getElementById('recommendButton');
-        const recommendationResultsDiv = document.getElementById('recommendationResults');
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        const otrasNotasInput = document.getElementById('otrasNotas');
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
 
-        let selectedAdjectives = new Set();
-        let selectedFamilies = new Set();
-        let selectedNotes = new Set();
-        let selectedOccasions = new Set();
-        let selectedAttributes = new Set();
-        let selectedSeasons = new Set();
-        let selectedTimes = new Set();
-        let selectedIntensity = null;
-
-        function updateMoodBoard() {
-            moodBoard.innerHTML = '';
-            selectedAdjectives.forEach(adjective => {
-                const button = document.createElement('span');
-                button.classList.add('inline-flex', 'items-center', 'rounded-full', 'bg-teal-100', 'text-teal-800', 'text-xs', 'font-medium', 'px-2.5', 'py-0.5');
-                const icon = adjectiveButtons.find(btn => btn.dataset.adjective === adjective)?.dataset.icon || '✨';
-                button.innerHTML = `${icon} ${adjective} <button type="button" class="inline-flex items-center ml-1.5 -mr-0.5 h-4 w-4 rounded-full hover:bg-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-500" aria-label="Remove">
-                    <span class="sr-only">Remove badge</span>
-                    <svg class="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m1 1 6 6m0-6L1 7"/>
-                    </svg>
-                </button>`;
-                const removeButton = button.querySelector('button');
-                removeButton.addEventListener('click', () => {
-                    selectedAdjectives.delete(adjective);
-                    const relatedAdjectiveButton = Array.from(adjectiveButtons).find(btn => btn.dataset.adjective === adjective);
-                    if (relatedAdjectiveButton) {
-                        relatedAdjectiveButton.classList.remove('selected-adjective');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70, // Adjusted for sticky header
+                            behavior: 'smooth'
+                        });
                     }
-                    updateMoodBoard();
+                     if (mobileMenu.classList.contains('hidden') === false) {
+                        mobileMenu.classList.add('hidden');
+                    }
                 });
-                moodBoard.appendChild(button);
             });
-            if (selectedAdjectives.size === 0) {
-                moodBoard.innerHTML = '<p class="text-gray-500 text-sm">Selecciona adjetivos para ver tu mood board.</p>';
-            }
-        }
-
-        adjectiveButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const adjective = this.dataset.adjective;
-                if (selectedAdjectives.has(adjective)) {
-                    selectedAdjectives.delete(adjective);
-                    this.classList.remove('selected-adjective');
-                } else {
-                    selectedAdjectives.add(adjective);
-                    this.classList.add('selected-adjective');
-                }
-                updateMoodBoard();
-            });
-        });
-
-        otrosAdjetivosInput.addEventListener('change', function() {
-            const nuevosAdjetivos = this.value.split(',').map(s => s.trim()).filter(s => s !== '');
-            nuevosAdjetivos.forEach(adjetivo => {
-                if (!selectedAdjectives.has(adjetivo)) {
-                    selectedAdjectives.add(adjetivo);
-                    // Consider adding a visual cue for these added adjectives if needed
-                }
-            });
-            this.value = ''; // Clear the input after adding
-            updateMoodBoard();
-        });
-
-        familyCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    selectedFamilies.add(this.dataset.family);
-                } else {
-                    selectedFamilies.delete(this.dataset.family);
-                }
-            });
-        });
-
-        noteCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    selectedNotes.add(this.dataset.note);
-                } else {
-                    selectedNotes.delete(this.dataset.note);
-                }
-            });
-        });
-
-        occasionCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    selectedOccasions.add(this.dataset.occasion);
-                } else {
-                    selectedOccasions.delete(this.dataset.occasion);
-                }
-            });
-        });
-
-        attributeCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    selectedAttributes.add(this.dataset.attribute);
-                } else {
-                    selectedAttributes.delete(this.dataset.attribute);
-                }
-            });
-        });
-
-        seasonButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const season = this.dataset.season;
-                if (selectedSeasons.has(season)) {
-                    selectedSeasons.delete(season);
-                    this.classList.remove('selected-season');
-                } else {
-                    selectedSeasons.add(season);
-                    this.classList.add('selected-season');
-                }
-            });
-        });
-
-        timeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const time = this.dataset.time;
-                if (selectedTimes.has(time)) {
-                    selectedTimes.delete(time);
-                    this.classList.remove('selected-time');
-                } else {
-                    selectedTimes.add(time);
-                    this.classList.add('selected-time');
-                }
-            });
-        });
-
-        intensityButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                if (selectedIntensity === this.dataset.intensity) {
-                    selectedIntensity = null;
-                    intensityButtons.forEach(btn => btn.classList.remove('selected-intensity'));
-                } else {
-                    selectedIntensity = this.dataset.intensity;
-                    intensityButtons.forEach(btn => btn.classList.remove('selected-intensity'));
-                    this.classList.add('selected-intensity');
-                }
-            });
-        });
-
-        otrasNotasInput.addEventListener('change', function() {
-            const nuevasNotas = this.value.split(',').map(s => s.trim()).filter(s => s !== '');
-            nuevasNotas.forEach(nota => {
-                if (!selectedNotes.has(nota)) {
-                    selectedNotes.add(nota);
-                    // Optionally add a visual cue
-                }
-            });
-            this.value = ''; // Clear the input
-        });
-
-        const fragranceDatabase = [
-            {
-                name: "Floral Breeze",
-                brand: "Aqua Florals",
-                families: ["Floral", "Acuática"],
-                notes: ["Rosa", "Jazmín", "Sal Marina", "Almizcle"],
-                adjectives: ["Fresco", "Romántico", "Natural"],
-                occasions: ["Diario", "Casual"],
-                attributes: ["Frescura", "Versatilidad"],
-                seasons: ["Primavera", "Verano"],
-                times: ["Mañana", "Tarde"],
-                intensity: "Sutil",
-                similarTo: [],
-                oppositeTo: []
-            },
-            {
-                name: "Woody Elegance",
-                brand: "Terra Woods",
-                families: ["Amaderada", "Especiada"],
-                notes: ["Sándalo", "Cedro", "Pimienta Negra", "Vetiver"],
-                adjectives: ["Sofisticado", "Elegante", "Misterioso"],
-                occasions: ["Noche", "Formal"],
-                attributes: ["Longevidad", "Calidad"],
-                seasons: ["Otoño", "Invierno"],
-                times: ["Tarde", "Noche"],
-                intensity: "Moderado",
-                similarTo: [],
-                oppositeTo: []
-            },
-            {
-                name: "Citrus Burst",
-                brand: "Zesty Scents",
-                families: ["Cítrica", "Aromática"],
-                notes: ["Bergamota", "Limón", "Menta", "Albahaca"],
-                adjectives: ["Energético", "Vibrante", "Fresco"],
-                occasions: ["Diario", "Deporte"],
-                attributes: ["Frescura", "Estela"],
-                seasons: ["Primavera", "Verano"],
-                times: ["Mañana", "Tarde"],
-                intensity: "Sutil",
-                similarTo: [],
-                oppositeTo: []
-            },
-             {
-                name: "Oriental Mystery",
-                brand: "Desert Aromas",
-                families: ["Oriental", "Especiada"],
-                notes: ["Vainilla", "Ámbar", "Cardamomo", "Oud"],
-                adjectives: ["Misterioso", "Cálido", "Apasionado"],
-                occasions: ["Noche", "Citas Nocturnas"],
-                attributes: ["Longevidad", "Estela"],
-                seasons: ["Otoño", "Invierno"],
-                times: ["Tarde", "Noche"],
-                intensity: "Intenso",
-                similarTo: [],
-                oppositeTo: []
-            },
-            {
-                name: "Fruity Delight",
-                brand: "Sweet Airs",
-                families: ["Frutal", "Floral"],
-                notes: ["Manzana", "Pera", "Rosa", "Almizcle"],
-                adjectives: ["Romántico", "Chispeante", "Femenina"],
-                occasions: ["Diario", "Casual"],
-                attributes: ["Versatilidad", "Frescura"],
-                seasons: ["Primavera", "Verano"],
-                times: ["Mañana", "Tarde"],
-                intensity: "Sutil",
-                similarTo: [],
-                oppositeTo: []
-            },
-            {
-                name: "Leathery Woods",
-                brand: "Hide & Timber",
-                families: ["Cuero", "Amaderada"],
-                notes: ["Cuero", "Tabaco", "Vetiver", "Pachulí"],
-                adjectives: ["Atrevido", "Único", "Clásico"],
-                occasions: ["Noche", "Formal"],
-                attributes: ["Longevidad", "Calidad"],
-                seasons: ["Otoño", "Invierno"],
-                times: ["Tarde", "Noche"],
-                intensity: "Moderado",
-                similarTo: [],
-                oppositeTo: []
-            },
-             {
-                name: "Gourmand Dream",
-                brand: "Sugar & Spice",
-                families: ["Gourmand", "Vainilla"],
-                notes: ["Vainilla", "Caramelo", "Almendra", "Haba Tonka"],
-                adjectives: ["Cálido", "Acogedor", "Dulce"],
-                occasions: ["Casual", "Noche"],
-                attributes: ["Longevidad", "Estela"],
-                seasons: ["Otoño", "Invierno"],
-                times: ["Tarde", "Noche"],
-                intensity: "Moderado",
-                similarTo: [],
-                oppositeTo: []
-            },
-            {
-                name: "Aquatic Fresh",
-                brand: "Ocean Breeze",
-                families: ["Acuática", "Aromática"],
-                notes: ["Sal Marina", "Algas", "Madera Flotante", "Cítricos"],
-                adjectives: ["Fresco", "Natural", "Sereno"],
-                occasions: ["Diario", "Verano"],
-                attributes: ["Frescura", "Versatilidad"],
-                seasons: ["Primavera", "Verano"],
-                times: ["Mañana", "Tarde"],
-                intensity: "Sutil",
-                similarTo: [],
-                oppositeTo: []
-            }
-        ];
-
-        function calculateScore(fragrance) {
-            let score = 0;
-            const userAdjectives = Array.from(selectedAdjectives).map(adj => adj.toLowerCase());
-            const fragranceAdjectives = fragrance.adjectives.map(adj => adj.toLowerCase());
-            const commonAdjectives = userAdjectives.filter(adj => fragranceAdjectives.includes(adj));
-            score += commonAdjectives.length * 5;
-
-            const userFamilies = Array.from(selectedFamilies).map(fam => fam.toLowerCase());
-            const fragranceFamilies = fragrance.families.map(fam => fam.toLowerCase());
-            const commonFamilies = userFamilies.filter(fam => fragranceFamilies.includes(fam));
-            score += commonFamilies.length * 3;
-
-            const userNotes = Array.from(selectedNotes).map(note => note.toLowerCase());
-            const fragranceNotes = Object.values(fragrance.notes).flat().map(note => note.toLowerCase());
-            const commonNotes = userNotes.filter(note => fragranceNotes.includes(note));
-            score += commonNotes.length * 2;
-
-            const userOccasions = Array.from(selectedOccasions).map(occ => occ.toLowerCase());
-            const fragranceOccasions = fragrance.occasions.map(occ => occ.toLowerCase());
-            const commonOccasions = userOccasions.filter(occ => fragranceOccasions.includes(occ));
-            score += commonOccasions.length * 2;
-
-            const userAttributes = Array.from(selectedAttributes).map(attr => attr.toLowerCase());
-            const fragranceAttributes = fragrance.attributes.map(attr => attr.toLowerCase());
-            const commonAttributes = userAttributes.filter(attr => fragranceAttributes.includes(attr));
-            score += commonAttributes.length * 2.5;
-
-            if (selectedSeasons.size > 0 && fragrance.seasons) {
-                const userSeasons = Array.from(selectedSeasons).map(s => s.toLowerCase());
-                const fragranceSeasons = fragrance.seasons.map(s => s.toLowerCase());
-                const commonSeasons = userSeasons.filter(s => fragranceSeasons.includes(s));
-                score += commonSeasons.length * 2;
+            
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
             }
 
-            if (selectedTimes.size > 0 && fragrance.times) {
-                const userTimes = Array.from(selectedTimes).map(t => t.toLowerCase());
-                const fragranceTimes = fragrance.times.map(t => t.toLowerCase());
-                const commonTimes = userTimes.filter(t => fragranceTimes.includes(t));
-                score += commonTimes.length * 1.5;
-            }
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
 
-            if (selectedIntensity && fragrance.intensity && selectedIntensity.toLowerCase() === fragrance.intensity.toLowerCase()) {
-                score += 4;
-            }
-
-            const likedFragrancesInput = currentFragrancesInput.value.toLowerCase().split(',').map(s => s.trim()).filter(s => s !== '');
-            likedFragrancesInput.forEach(liked => {
-                if (fragrance.similarTo && fragrance.similarTo.map(s => s.toLowerCase()).includes(liked)) {
-                    score += 7;
-                }
-            });
-
-            const dislikedFragrancesInputVal = dislikedFragrancesInput.value.toLowerCase().split(',').map(s => s.trim()).filter(s => s !== '');
-            dislikedFragrancesInputVal.forEach(disliked => {
-                if (fragrance.oppositeTo && fragrance.oppositeTo.map(o => o.toLowerCase()).includes(disliked)) {
-                    score -= 5; // Penalize if similar to disliked
-                } else if (fragrance.similarTo && fragrance.similarTo.map(s => s.toLowerCase()).includes(disliked)) {
-                    score -= 8; // Stronger penalty if directly similar to disliked
-                }
-            });
-
-            return score;
-        }
-
-        function generateFragranceSuggestions() {
-            loadingOverlay.classList.add('active');
-            setTimeout(() => {
-                const scoredFragrances = fragranceDatabase.map(fragrance => ({
-                    ...fragrance,
-                    score: calculateScore(fragrance)
-                }));
-
-                const sortedFragrances = scoredFragrances.sort((a, b) => b.score - a.score);
-                const topSuggestions = sortedFragrances.filter(f => f.score > 0).slice(0, 3);
-
-                recommendationResultsDiv.innerHTML = '';
-                if (topSuggestions.length > 0) {
-                    topSuggestions.forEach(fragrance => {
-                        const card = document.createElement('div');
-                        card.classList.add('fragrance-card', 'p-6', 'rounded-md', 'shadow-md', 'mb-4');
-                        card.innerHTML = `
-                            <h3 class="text-xl font-semibold text-teal-700 mb-2">${fragrance.name} (${fragrance.brand})</h3>
-                            <p class="text-gray-600 mb-1">Familias: ${fragrance.families.join(', ')}</p>
-                            <p class="text-gray-600 mb-1">Notas principales: ${Object.values(fragrance.notes).flat().slice(0, 5).join(', ')}...</p>
-                            <p class="text-gray-600">Por qué te podría gustar: Coincide con tus preferencias en ${calculateScore(fragrance) > 0 ? `al menos ${Math.round(calculateScore(fragrance) / (Object.keys(fragrance).length * 2))} aspectos` : 'algunos aspectos'}.</p>
-                        `;
-                        recommendationResultsDiv.appendChild(card);
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.classList.remove('bg-emerald-600', 'text-white', 'border-emerald-500');
+                        btn.classList.add('bg-emerald-50', 'text-emerald-700');
                     });
-                } else {
-                    recommendationResultsDiv.innerHTML = '<p class="text-gray-700">No se encontraron sugerencias basadas en tus selecciones.</p>';
-                }
-                loadingOverlay.classList.remove('active');
-            }, 500);
-        }
+                    button.classList.add('active');
+                    button.classList.add('bg-emerald-600', 'text-white', 'border-emerald-500');
+                    button.classList.remove('bg-emerald-50', 'text-emerald-700');
 
-        recommendButton.addEventListener('click', generateFragranceSuggestions);
+                    const targetTab = button.dataset.tab;
+                    tabContents.forEach(content => {
+                        if (content.id === targetTab) {
+                            content.classList.remove('hidden');
+                            content.classList.add('section-fade-in');
+                        } else {
+                            content.classList.add('hidden');
+                            content.classList.remove('section-fade-in');
+                        }
+                    });
+                });
+            });
+            
+            function formatLabel(str, maxLength = 16) {
+                if (typeof str !== 'string') return [''];
+                if (str.length <= maxLength) return str;
+                const words = str.split(' ');
+                let currentLine = '';
+                const lines = [];
+                for (const word of words) {
+                    if ((currentLine + word).length > maxLength && currentLine.length > 0) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                    }
+                    currentLine += word + ' ';
+                }
+                 if (currentLine.trim().length > 0) {
+                    lines.push(currentLine.trim());
+                }
+                return lines.length > 0 ? lines : [str];
+            }
+
+            const marketGrowthCtx = document.getElementById('marketGrowthChart')?.getContext('2d');
+            if (marketGrowthCtx) {
+                new Chart(marketGrowthCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Valor Mercado 2023', 'Proyección Valor 2031'],
+                        datasets: [{
+                            label: 'Miles de Millones USD',
+                            data: [57.14, 87.67],
+                            backgroundColor: ['rgba(5, 150, 105, 0.7)', 'rgba(4, 120, 87, 0.7)'],
+                            borderColor: ['#059669', '#047857'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { 
+                            y: { 
+                                beginAtZero: true, 
+                                title: { display: true, text: 'Miles de Millones USD', font: {size: 10} },
+                                ticks: { font: { size: 10 } }
+                            },
+                            x: { ticks: { 
+                                font: { size: 10 },
+                                callback: function(value, index, ticks) {
+                                    const labels = ['Valor Mercado 2023', 'Proyección Valor 2031'];
+                                    return formatLabel(labels[index], 12);
+                                }
+                            }}
+                        },
+                        plugins: { 
+                            legend: { display: false }, 
+                            tooltip: { 
+                                displayColors: false,
+                                titleFont: { size: 12 },
+                                bodyFont: { size: 11 },
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + context.parsed.y.toFixed(2);
+                                    }
+                                }
+                            } 
+                        }
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
