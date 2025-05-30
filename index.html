@@ -7,8 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .chart-container { position: relative; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto; height: 280px; max-height: 350px; }
-        @media (min-width: 768px) { .chart-container { height: 300px; } }
+        .chart-container { position: relative; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto; height: auto; /* Ajuste automático de altura */ }
+        @media (min-width: 768px) { .chart-container { max-width: 50%; } } /* Ocupar la mitad en pantallas grandes */
         .tab-button.active { border-bottom-color: #059669; color: #047857; font-weight: 600; }
         .tab-button { transition: all 0.3s ease; border-bottom: 2px solid transparent; }
         .section-fade-in { animation: fadeIn 0.7s ease-out forwards; }
@@ -91,8 +91,15 @@
             border-radius: 0.5rem;
             margin-top: 1rem;
             font-size: 0.9rem;
-            color: #3b82f6; /* Un azul suave */
-            border-left: 0.25rem solid #2563eb;
+            color: #1a5632; /* Verde más elegante */
+            border-left: 0.25rem solid #15803d;
+        }
+        .glosario-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #059669;
+            margin-bottom: 1rem;
+            text-align: center;
         }
         .glosario dt {
             font-weight: bold;
@@ -104,39 +111,41 @@
             margin-bottom: 0.5em;
             color: #475569;
         }
-        .glosario-item {
-            cursor: pointer;
-            position: relative;
-        }
-        .glosario-tooltip {
-            position: absolute;
-            background-color: #fff;
-            color: #000;
-            border: 1px solid #ccc;
-            padding: 0.5rem;
-            border-radius: 0.25rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            font-size: 0.8rem;
-            white-space: nowrap;
-        }
-        #manifiesto-olfativo {
+        #mi-manifiesto {
             background-color: #f9f7f3;
             padding: 2rem;
             border-radius: 0.5rem;
             margin-top: 2rem;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
-        #manifiesto-olfativo h4 {
+        #mi-manifiesto h4 {
             color: #10b981;
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             margin-bottom: 1rem;
             text-align: center;
         }
-        #manifiesto-olfativo p {
+        #mi-manifiesto p {
             color: #4b5563;
             line-height: 1.7;
-            text-align: center;
+            margin-bottom: 1rem;
+        }
+        #mi-manifiesto ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        #mi-manifiesto li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+        #mi-manifiesto li::before {
+            content: "🌱";
+            position: absolute;
+            left: 0;
+        }
+        .manifiesto-bold {
+            font-weight: bold;
+            color: #10b981;
         }
         #cta-section {
             margin-top: 3rem;
@@ -191,18 +200,18 @@
                     La industria de fragancias está en plena transformación, con un crecimiento impulsado por la innovación y un consumidor más consciente. Este análisis explora las tendencias clave que van más allá del nicho y cómo las marcas líderes están adaptando sus estrategias.
                 </p>
             </div>
-            <div class="grid md:grid-cols-2 gap-8 items-center bg-white p-6 rounded-xl shadow-xl">
+            <div class="grid md:grid-cols-2 gap-8 items-start bg-white p-6 rounded-xl shadow-xl">
                 <div>
-    <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Un Mercado en Auge</h3>
-    <p class="text-stone-700 mb-2 text-sm">El mercado global de perfumes, valorado en <strong>57.14 mil millones USD en 2023</strong>, se proyecta alcanzar <strong>87.67 mil millones USD para 2031</strong> (CAGR 6.31%).</p>
-    <p class="text-stone-700 mb-2 text-sm">Este crecimiento está impulsado significativamente por el <strong>resurgimiento del interés en las fragancias finas tras la pandemia</strong>, donde los consumidores buscan <strong>bienestar y autoexpresión</strong> a través de los aromas. Además, la creciente influencia de las <strong>generaciones más jóvenes, como la Gen Z y la Alfa</strong>, con sus propias preferencias y canales de compra, está dinamizando el mercado.</p>
-    <p class="text-stone-700 mb-2 text-sm">La tendencia hacia la <strong>premiumización</strong>, donde los consumidores están dispuestos a invertir en productos de mayor calidad y experiencias únicas, también juega un papel crucial en este crecimiento proyectado.</p>
-    <p class="text-stone-700 text-sm">El futuro de la perfumería se moldea por la <strong>personalización</strong>, la <strong>tecnología</strong>, el <strong>bienestar</strong> y la <strong>sostenibilidad</strong>, redefiniendo la relación del consumidor con el aroma y abriendo nuevas vías para la innovación y el crecimiento de la industria.</p>
-</div>
-                    <div class="chart-container">
-                        <canvas id="marketGrowthChart"></canvas>
-                    </div>
+                    <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Un Mercado en Auge</h3>
+                    <p class="text-stone-700 mb-2 text-sm">El mercado global de perfumes, valorado en <strong>57.14 mil millones USD en 2023</strong>, se proyecta alcanzar <strong>87.67 mil millones USD para 2031</strong> (CAGR 6.31%).</p>
+                    <p class="text-stone-700 mb-2 text-sm">Este crecimiento está impulsado significativamente por el <strong>resurgimiento del interés en las fragancias finas tras la pandemia</strong>, donde los consumidores buscan <strong>bienestar y autoexpresión</strong> a través de los aromas. Además, la creciente influencia de las <strong>generaciones más jóvenes, como la Gen Z y la Alfa</strong>, con sus propias preferencias y canales de compra, está dinamizando el mercado.</p>
+                    <p class="text-stone-700 mb-2 text-sm">La tendencia hacia la <strong>premiumización</strong>, donde los consumidores están dispuestos a invertir en productos de mayor calidad y experiencias únicas, también juega un papel crucial en este crecimiento proyectado.</p>
+                    <p class="text-stone-700 text-sm">El futuro de la perfumería se moldea por la <strong class="lab-future-concept-text">personalización</strong>, la <strong class="lab-future-concept-text">tecnología</strong>, el <strong class="lab-future-concept-text">bienestar</strong> y la <strong class="lab-future-concept-text">sostenibilidad</strong>, redefiniendo la relación del consumidor con el aroma y abriendo nuevas vías para la innovación y el crecimiento de la industria.</p>
                 </div>
+                <div class="chart-container">
+                    <canvas id="marketGrowthChart"></canvas>
+                </div>
+            </div>
         </section>
 
         <div class="my-10 border-t border-stone-300"></div>
@@ -342,25 +351,86 @@
         <h3 class="section-title">Conclusión: Navegando el Dinámico Futuro Olfativo</h3>
         <div class="bg-white p-6 rounded-xl shadow-xl text-left">
             <ul>
-                <li>El futuro de la industria de las fragancias se presenta <strong>vibrante</strong> y repleto de <strong>oportunidades</strong>. Para capitalizarlas, las marcas deben enfocarse en pilares clave:</li>
+                <li>El futuro de la industria de las fragancias se presenta <strong class="manifiesto-bold">vibrante</strong> y repleto de <strong class="manifiesto-bold">oportunidades</strong>. Para capitalizarlas, las marcas deben enfocarse en pilares clave:</li>
                 <ol class="list-decimal list-inside mt-2">
-                    <li><strong>Sostenibilidad</strong>: Adoptar prácticas responsables con el planeta y ofrecer transparencia al consumidor.</li>
-                    <li><strong>Integración tecnológica</strong>: Utilizar la innovación digital para mejorar la creación, la experiencia de compra y la conexión con el cliente.</li>
-                    <li><strong>Bienestar funcional</strong>: Desarrollar fragancias que no solo perfumen, sino que también aporten beneficios emocionales y funcionales.</li>
-                    <li><strong>Personalización a gran escala</strong>: Ofrecer productos y experiencias adaptadas a las necesidades y gustos individuales.</li>
+                    <li><strong class="manifiesto-bold">Sostenibilidad</strong>: Adoptar prácticas responsables con el planeta y ofrecer transparencia al consumidor.</li>
+                    <li><strong class="manifiesto-bold">Integración tecnológica</strong>: Utilizar la innovación digital para mejorar la creación, la experiencia de compra y la conexión con el cliente.</li>
+                    <li><strong class="manifiesto-bold">Bienestar funcional</strong>: Desarrollar fragancias que no solo perfumen, sino que también aporten beneficios emocionales y funcionales.</li>
+                    <li><strong class="manifiesto-bold">Personalización a gran escala</strong>: Ofrecer productos y experiencias adaptadas a las necesidades y gustos individuales.</li>
                 </ol>
                 <br>
                 <li>Las marcas que aspiren al liderazgo deberán abrazar estos cambios con:
                     <ul class="list-disc list-inside mt-2">
-                        <li><strong>Agilidad</strong> para adaptarse a un mercado en constante evolución.</li>
-                        <li><strong>Autenticidad</strong> para construir una conexión genuina con los consumidores.</li>
-                        <li><strong>Innovación</strong> constante en productos, procesos y comunicación.</li>
+                        <li><strong class="manifiesto-bold">Agilidad</strong> para adaptarse a un mercado en constante evolución.</li>
+                        <li><strong class="manifiesto-bold">Autenticidad</strong> para construir una conexión genuina con los consumidores.</li>
+                        <li><strong class="manifiesto-bold">Innovación</strong> constante en productos, procesos y comunicación.</li>
                     </ul>
                 </li>
                 <br>
-                <li>En definitiva, invirtiendo en <strong>I+D</strong>, fomentando la <strong>transparencia</strong> en todas sus operaciones y <strong>conectando genuinamente</strong> con las nuevas generaciones de consumidores, las marcas estarán <strong>mejor posicionadas</strong> no solo para sobrevivir, sino para prosperar y liderar este <strong>apasionante y evolutivo panorama olfativo</strong> del mañana.</li>
+                <li>En definitiva, invirtiendo en <strong class="manifiesto-bold">I+D</strong>, fomentando la <strong class="manifiesto-bold">transparencia</strong> en todas sus operaciones y <strong class="manifiesto-bold">conectando genuinamente</strong> con las nuevas generaciones de consumidores, las marcas estarán <strong class="manifiesto-bold">mejor posicionadas</strong> no solo para sobrevivir, sino para prosperar y liderar este <strong class="manifiesto-bold">apasionante y evolutivo panorama olfativo</strong> del mañana.</li>
             </ul>
         </div>
+    </section>
+
+    <div class="glosario bg-white p-6 rounded-xl shadow-md mt-10">
+        <h3 class="glosario-title">Glosario de Perfumería</h3>
+        <dl>
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Acorde</strong></dt>
+            <dd>Una combinación de varias notas olfativas que crean una impresión fragante única.</dd>
+
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Nota de Cabeza</strong></dt>
+            <dd>La primera impresión de un perfume, las notas más volátiles que se perciben inicialmente.</dd>
+
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Nota de Corazón</strong></dt>
+            <dd>El "cuerpo" del perfume, las notas que se desarrollan después de las notas de cabeza y duran más.</dd>
+
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Nota de Fondo</strong></dt>
+            <dd>Las notas más duraderas y ricas de un perfume, que se revelan al final y proporcionan la base de la fragancia.</dd>
+
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Sillage</strong></dt>
+            <dd>La estela o rastro que deja un perfume al pasar.</dd>
+
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Fijador</strong></dt>
+            <dd>Ingrediente que ayuda a que un perfume dure más tiempo en la piel.</dd>
+
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Absoluto</strong></dt>
+            <dd>Extracto de planta aromática obtenido mediante solventes, más concentrado que un aceite esencial.</dd>
+        </dl>
+    </div>
+
+    <section id="mi-manifiesto" class="py-10 section-fade-in">
+        <div class="bg-white p-8 rounded-xl shadow-md">
+            <h4 class="text-2xl font-bold text-emerald-700 mb-4 text-center">Mi Manifiesto por el Futuro Olfativo</h4>
+            <p class="text-stone-700 leading-relaxed mb-4">
+                Creo firmemente que el futuro de la perfumería reside en la convergencia de la <strong class="manifiesto-bold">sostenibilidad</strong>, la <strong class="manifiesto-bold">tecnología</strong>, el enfoque en el <strong class="manifiesto-bold">bienestar</strong> y la <strong class="manifiesto-bold">personalización</strong>. No se trata solo de crear aromas agradables, sino de construir experiencias olfativas que respeten nuestro planeta, se enriquezcan con la innovación digital y aporten valor a la vida de las personas.
+            </p>
+            <h5 class="font-semibold text-emerald-600 text-lg mb-2 text-center">El Mañana Olfativo: Un Esquema de Avances</h5>
+            <ul class="mt-4">
+                <li>
+                    <strong class="manifiesto-bold">Perfumes Conscientes:</strong> Ingredientes de origen ético y sostenible, envases eco-diseñados.
+                </li>
+                <li>
+                    <strong class="manifiesto-bold">Aromas Inteligentes:</strong> Creación y recomendación de fragancias mediante IA, experiencias "phygitales" inmersivas.
+                </li>
+                <li>
+                    <strong class="manifiesto-bold">Bienestar Olfativo:</strong> Fragancias funcionales con beneficios emocionales y cognitivos probados.
+                </li>
+                <li>
+                    <strong class="manifiesto-bold">Perfumes a Medida:</strong> Personalización a gran escala, permitiendo a cada individuo crear su firma olfativa única.
+                </li>
+            </ul>
+            <p class="text-stone-700 leading-relaxed mt-4 text-center">
+                Mi visión es colaborar contigo para hacer realidad este futuro, creando fragancias y estrategias que no solo capturen la esencia del mañana, sino que también resuenen profundamente con un consumidor cada vez más informado y exigente.
+            </p>
+        </div>
+    </section>
+
+    <section id="cta-section" class="section-fade-in mt-10 text-center">
+        <h3 class="section-title">¿Listo para Liderar la Innovación Olfativa?</h3>
+        <p class="text-lg text-stone-700 mb-6">
+            Si tu marca busca definir el futuro del perfume, estoy aquí para ayudarte a construir ese camino juntos.
+        </p>
+        <a href="#contacto" id="cta-button" class="inline-block px-6 py-3 rounded-md text-white font-bold bg-emerald-500 hover:bg-emerald-600 transition-colors duration-300">Hablemos del Futuro Olfativo</a>
     </section>
 
     <section id="articulos-relacionados" class="py-10 section-fade-in">
@@ -410,41 +480,30 @@
     </section>
 
     <div class="glosario bg-white p-6 rounded-xl shadow-md mt-10">
-        <h3>Glosario de Términos de Perfumería</h3>
+        <h3 class="glosario-title text-center">Glosario de Perfumería</h3>
         <dl>
-            <dt class="glosario-item"><span data-tooltip="Una combinación de varias notas olfativas que crean una impresión fragante única." class="underline decoration-emerald-500 decoration-2">Acorde</span></dt>
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Acorde</strong></dt>
             <dd>Una combinación de varias notas olfativas que crean una impresión fragante única.</dd>
 
-            <dt class="glosario-item"><span data-tooltip="La primera impresión de un perfume, las notas más volátiles que se perciben inicialmente." class="underline decoration-emerald-500 decoration-2">Nota de Cabeza</span></dt>
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Nota de Cabeza</strong></dt>
             <dd>La primera impresión de un perfume, las notas más volátiles que se perciben inicialmente.</dd>
 
-            <dt class="glosario-item"><span data-tooltip="El 'cuerpo' del perfume, las notas que se desarrollan después de las notas de cabeza y duran más." class="underline decoration-emerald-500 decoration-2">Nota de Corazón</span></dt>
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Nota de Corazón</strong></dt>
             <dd>El "cuerpo" del perfume, las notas que se desarrollan después de las notas de cabeza y duran más.</dd>
 
-            <dt class="glosario-item"><span data-tooltip="Las notas más duraderas y ricas de un perfume, que se revelan al final y proporcionan la base de la fragancia." class="underline decoration-emerald-500 decoration-2">Nota de Fondo</span></dt>
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Nota de Fondo</strong></dt>
             <dd>Las notas más duraderas y ricas de un perfume, que se revelan al final y proporcionan la base de la fragancia.</dd>
 
-            <dt class="glosario-item"><span data-tooltip="La estela o rastro que deja un perfume al pasar." class="underline decoration-emerald-500 decoration-2">Sillage</span></dt>
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Sillage</strong></dt>
             <dd>La estela o rastro que deja un perfume al pasar.</dd>
+
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Fijador</strong></dt>
+            <dd>Ingrediente que ayuda a que un perfume dure más tiempo en la piel.</dd>
+
+            <dt><strong class="underline decoration-emerald-500 decoration-2">Absoluto</strong></dt>
+            <dd>Extracto de planta aromática obtenido mediante solventes, más concentrado que un aceite esencial.</dd>
         </dl>
     </div>
-
-    <section id="manifiesto-olfativo" class="section-fade-in">
-        <div class="bg-white p-8 rounded-xl shadow-md">
-            <h4 class="text-2xl font-bold text-emerald-700 mb-4 text-center">Nuestro Manifiesto por el Futuro Olfativo</h4>
-            <p class="text-stone-700 leading-relaxed text-center">
-                Creemos en un futuro donde la perfumería no solo deleita nuestros sentidos, sino que también respeta nuestro planeta, se apoya en la innovación tecnológica para enriquecer la experiencia, fomenta nuestro bienestar y celebra la individualidad de cada persona. Este análisis es una hoja de ruta hacia ese futuro, donde la ciencia y la creatividad se fusionan para crear experiencias olfativas trascendentales.
-            </p>
-        </div>
-    </section>
-
-    <section id="cta-section" class="section-fade-in mt-10">
-        <h3 class="section-title">¿Listo para Innovar en el Mundo de las Fragancias?</h3>
-        <p class="text-lg text-stone-700 mb-6 text-center">
-            Si tu marca busca liderar el futuro olfativo, estoy aquí para ayudarte a trazar la estrategia.
-        </p>
-        <a href="#contacto" id="cta-button">Hablemos del Futuro Olfativo</a>
-    </section>
 
     <div class="my-10"></div>
 
@@ -459,8 +518,8 @@
     <script>
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
-        const glosarioItems = document.querySelectorAll('.glosario-item span');
         const body = document.body;
+        const ctaButton = document.getElementById('cta-button');
 
         function showTab(tabId) {
             tabContents.forEach(content => {
@@ -537,23 +596,12 @@
             });
         }
 
-        // Glosario Tooltips
-        glosarioItems.forEach(item => {
-            item.addEventListener('mouseover', (event) => {
-                const tooltipText = item.getAttribute('data-tooltip');
-                const tooltip = document.createElement('div');
-                tooltip.classList.add('glosario-tooltip');
-                tooltip.textContent = tooltipText;
-                body.appendChild(tooltip);
-                const rect = event.target.getBoundingClientRect();
-                tooltip.style.left = `${rect.left + window.scrollX}px`;
-                tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
-
-                item.addEventListener('mouseout', () => {
-                    tooltip.remove();
-                });
+        // Enlace del botón CTA (ajusta la URL según necesites)
+        if (ctaButton) {
+            ctaButton.addEventListener('click', () => {
+                window.location.href = "#contacto"; // Reemplaza "#contacto" con la URL deseada
             });
-        });
+        }
     </script>
 
 </body>
