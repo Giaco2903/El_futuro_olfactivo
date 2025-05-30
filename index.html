@@ -10,14 +10,18 @@
 .chart-container {
     position: relative;
     width: 100%;
-    /* max-width: 450px; */ /* Comentado para que ocupe más ancho en pantallas pequeñas */
+    /* max-width: 450px; */
     margin-left: auto;
     margin-right: auto;
-    height: auto; /* Ajuste automático de altura */
+    height: auto;
+    min-width: 500px; /* Prueba con este valor */
+    min-height: 300px; /* Prueba con este valor */
 }
 @media (min-width: 768px) {
     .chart-container {
-        max-width: 70%; /* Ocupar el 70% en pantallas grandes */
+        max-width: 70%;
+        min-width: auto; /* Reinicia el min-width en pantallas grandes si es necesario */
+        min-height: auto; /* Reinicia el min-height en pantallas grandes si es necesario */
     }
 }
 .tab-button.active {
