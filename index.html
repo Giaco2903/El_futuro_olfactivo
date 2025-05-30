@@ -531,8 +531,7 @@
                 mobileMenu.classList.toggle('hidden');
             });
         }
-
-        // Chart.js integration
+// Chart.js integration
         const ctx = document.getElementById('marketGrowthChart');
         if (ctx) {
             new Chart(ctx, {
@@ -568,7 +567,10 @@
                         legend: {
                             display: false
                         }
-                    }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    aspectRatio: 2.5
                 }
             });
         }
