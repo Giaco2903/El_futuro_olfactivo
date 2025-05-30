@@ -160,9 +160,16 @@
             border-radius: 0.5rem;
             text-decoration: none;
             transition: background-color 0.3s ease;
+            cursor: pointer; /* Asegurarse de que el cursor indique que es clickeable */
         }
         #cta-button:hover {
             background-color: #059669;
+        }
+        .related-article-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* Asegura que la imagen cubra el contenedor sin deformarse */
+            aspect-ratio: 16/9; /* O la relación de aspecto que desees */
         }
     </style>
 </head>
@@ -373,7 +380,7 @@
     </section>
 
     <div class="glosario bg-white p-6 rounded-xl shadow-md mt-10">
-        <h3 class="glosario-title">Glosario de Perfumería</h3>
+        <h3 class="glosario-title text-center">Glosario de Perfumería</h3>
         <dl>
             <dt><strong class="underline decoration-emerald-500 decoration-2">Acorde</strong></dt>
             <dd>Una combinación de varias notas olfativas que crean una impresión fragante única.</dd>
@@ -398,7 +405,7 @@
         </dl>
     </div>
 
-    <section id="mi-manifiesto" class="py-10 section-fade-in">
+    <section id="mi-manifiesto" class="py-1 0 section-fade-in">
         <div class="bg-white p-8 rounded-xl shadow-md">
             <h4 class="text-2xl font-bold text-emerald-700 mb-4 text-center">Mi Manifiesto por el Futuro Olfativo</h4>
             <p class="text-stone-700 leading-relaxed mb-4">
@@ -438,7 +445,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
             <div class="bg-white rounded-xl shadow-md overflow-hidden">
                 <a href="https://elgeneracionalpost.com/actualidad/sociedad-actualidad/2025/0422/215963/la-inteligencia-artificial-que-ha-revolucionado-el-mundo-de-los-perfumes.html" target="_blank">
-                    <img src="Generacional.jpg" alt="Perfume IA" class="w-full h-auto object-cover">
+                    <img src="Generacional.jpg" alt="Perfume IA" class="w-full h-auto object-cover related-article-image">
                     <div class="p-4">
                         <div class="uppercase text-gray-500 text-xs mb-1">IA PERFUMES</div>
                         <h4 class="font-semibold text-emerald-700 mb-2 text-sm">La inteligencia artificial que ha revolucionado el mundo de los perfumes.</h4>
@@ -448,7 +455,7 @@
             </div>
             <div class="bg-white rounded-xl shadow-md overflow-hidden">
                 <a href="https://divainparfums.es/blogs/blog-divain/puede-un-perfume-ser-sostenible-lo-que-debes-saber" target="_blank">
-                        <img src="Divain_sustain.jpeg" alt="Perfume Sostenible" class="w-full h-auto object-cover">
+                        <img src="Divain_sustain.jpeg" alt="Perfume Sostenible" class="w-full h-auto object-cover related-article-image">
                     <div class="p-4">
                         <div class="uppercase text-gray-500 text-xs mb-1">SOSTENIBILIDAD</div>
                         <h4 class="font-semibold text-emerald-700 mb-2 text-sm">¿Puede un perfume ser sostenible? Lo que debes saber.</h4>
@@ -457,8 +464,8 @@
                 </a>
             </div>
             <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                <a href="https://www.durance.es/blog/la-ciencia-detras-de-los-aromas-como-funcionan-las-fragancias-en-el-cerebro-n20" target="_blank">
-                    <img src="Durance.jpeg" alt="Aromaterapia Ciencia" class="w-full h-auto object-cover">
+                <a href="https://www.durance.es/blog/la-ciencia-detras-de-los-aromas-como-" target="_blank">
+                    <img src="Durance.jpeg" alt="Aromaterapia Ciencia" class="w-full h-auto object-cover related-article-image">
                     <div class="p-4">
                         <div class="uppercase text-gray-500 text-xs mb-1">AROMATERAPIA</div>
                         <h4 class="font-semibold text-emerald-700 mb-2 text-sm">La ciencia detrás de los aromas: Cómo funcionan las fragancias en el cerebro.</h4>
@@ -468,7 +475,7 @@
             </div>
             <div class="bg-white rounded-xl shadow-md overflow-hidden">
                 <a href="https://www.reasonwhy.es/actualidad/digitalizacion-olfato-camino-inteligencia-artificial-osmo" target="_blank">
-                    <img src="Reasonwhy.jpeg" alt="Olfato Digital" class="w-full h-auto object-cover">
+                    <img src="Reasonwhy.jpeg" alt="Olfato Digital" class="w-full h-auto object-cover related-article-image">
                     <div class="p-4">
                         <div class="uppercase text-gray-500 text-xs mb-1">TECNOLOGÍA</div>
                         <h4 class="font-semibold text-emerald-700 mb-2 text-sm">Digitalización del olfato: el camino hacia la inteligencia artificial de Osmo.</h4>
@@ -520,6 +527,7 @@
         const tabContents = document.querySelectorAll('.tab-content');
         const body = document.body;
         const ctaButton = document.getElementById('cta-button');
+        const chartCtx = document.getElementById('marketGrowthChart');
 
         function showTab(tabId) {
             tabContents.forEach(content => {
@@ -555,10 +563,9 @@
             });
         }
 
-        // Chart.js integration
-        const ctx = document.getElementById('marketGrowthChart');
-        if (ctx) {
-            new Chart(ctx, {
+        // Chart.js integration - Asegurándose de que el contexto existe
+        if (chartCtx) {
+            new Chart(chartCtx, {
                 type: 'bar',
                 data: {
                     labels: ['2023', '2026 (Proj.)', '2029 (Proj.)', '2031 (Proj.)'],
@@ -578,6 +585,12 @@
                                 display: true,
                                 text: 'Billones USD'
                             }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Año'
+                            }
                         }
                     },
                     plugins: {
@@ -591,15 +604,17 @@
                         legend: {
                             display: false
                         }
-                    }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
                 }
             });
         }
 
-        // Enlace del botón CTA (ajusta la URL según necesites)
+        // Enlace del botón CTA
         if (ctaButton) {
             ctaButton.addEventListener('click', () => {
-                window.location.href = "#contacto"; // Reemplaza "#contacto" con la URL deseada
+                window.location.href = "#contacto"; // Reemplaza "#contacto" con la URL deseada si es diferente
             });
         }
     </script>
