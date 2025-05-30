@@ -7,29 +7,61 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .chart-container { position: relative; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto; height: auto; /* Ajuste automático de altura */ }
-        @media (min-width: 768px) { .chart-container { max-width: 50%; } } /* Ocupar la mitad en pantallas grandes */
-        .tab-button.active { border-bottom-color: #059669; color: #047857; font-weight: 600; }
-        .tab-button { transition: all 0.3s ease; border-bottom: 2px solid transparent; }
-        .section-fade-in { animation: fadeIn 0.7s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        .brand-highlight { color: #047857; font-weight: 600; }
-        .icon-style { display: inline-block; margin-right: 8px; color: #059669; font-size: 1.1em; }
-        .nav-link { transition: color 0.3s ease; }
-       .pill-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: flex-start; /* Alinea el contenido al inicio */
-            padding: 0.6rem 1.2rem;
-            border-radius: 0.5rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid transparent;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Sombra sutil inicial */
-            cursor: pointer; /* Indica que son clickeables */
-        }
-
+.chart-container {
+    position: relative;
+    width: 100%;
+    /* max-width: 450px; */ /* Comentado para que ocupe más ancho en pantallas pequeñas */
+    margin-left: auto;
+    margin-right: auto;
+    height: auto; /* Ajuste automático de altura */
+}
+@media (min-width: 768px) {
+    .chart-container {
+        max-width: 50%; /* Ocupar la mitad en pantallas grandes */
+    }
+}
+.tab-button.active {
+    border-bottom-color: #059669;
+    color: #047857;
+    font-weight: 600;
+}
+.tab-button {
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+.section-fade-in {
+    animation: fadeIn 0.7s ease-out forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.brand-highlight {
+    color: #047857;
+    font-weight: 600;
+}
+.icon-style {
+    display: inline-block;
+    margin-right: 8px;
+    color: #059669;
+    font-size: 1.1em;
+}
+.nav-link {
+    transition: color 0.3s ease;
+}
+.pill-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinea el contenido al inicio */
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Sombra sutil inicial */
+    cursor: pointer; /* Indica que son clickeables */
+}
         .pill-button.active {
             background-color: #16a34a;
             color: white;
