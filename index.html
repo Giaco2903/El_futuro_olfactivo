@@ -69,15 +69,32 @@
         .brand-highlight { color: #047857; font-weight: 600; }
         .icon-style { display: inline-block; margin-right: 8px; color: #059669; font-size: 1.1em; }
         .nav-link { transition: color 0.3s ease; }
-        .pill-button {
-            background-color: #dcfce7; color: #15803d; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem;
-            font-weight: 500; transition: background-color 0.3s ease, color 0.3s ease; border: 1px solid transparent;
-        }
-        .pill-button:hover { background-color: #bbf7d0; }
-        .pill-button.active { background-color: #16a34a; color: white; border-color: #15803d; }
-        h3.section-title { font-size: 1.85rem; font-weight: 700; color: #065f46; margin-bottom: 0.75rem; text-align: center; }
-        p.section-subtitle { text-align: center; color: #374151; margin-bottom: 2rem; max-width: 3xl; margin-left: auto; margin-right: auto;}
-        .subtle-puig-nod { margin-top: 1rem; padding: 0.75rem; background-color: #f0fdf4; border-left: 3px solid #22c55e; font-size: 0.9rem; color: #14532d; }
+     .pill-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.2rem; /* Ajusté el padding para hacerlo más rectangular */
+    border-radius: 0.5rem; /* Bordes ligeramente redondeados */
+    font-size: 0.9rem; /* Ligeramente más grande */
+    font-weight: 600; /* Más reconocible */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.pill-button.active {
+    background-color: #16a34a;
+    color: white;
+    border-color: #15803d;
+}
+
+.pill-button:hover {
+    background-color: #bbf7d0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añadí una sombra suave al pasar el ratón */
+}
+
+.pill-button > span {
+    margin-right: 0.5rem; /* Espacio entre el icono y el texto */
+}
         body {
     margin: 0;
     padding: 0;
