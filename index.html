@@ -69,10 +69,10 @@
         .brand-highlight { color: #047857; font-weight: 600; }
         .icon-style { display: inline-block; margin-right: 8px; color: #059669; font-size: 1.1em; }
         .nav-link { transition: color 0.3s ease; }
-    .pill-button {
+   .pill-button {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Alinea el contenido al inicio */
     padding: 0.6rem 1.2rem;
     border-radius: 0.5rem;
     font-size: 0.9rem;
@@ -96,7 +96,20 @@
 }
 
 .pill-button > span {
-    margin-right: 0.5rem;
+    margin-right: 0.5rem; /* Espacio entre el círculo y el texto */
+}
+
+.pill-button .number-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem; /* Ajusta el tamaño del círculo */
+    height: 1.5rem; /* Ajusta el tamaño del círculo */
+    border-radius: 50%;
+    background-color: #fff; /* Color de fondo del círculo */
+    color: #000; /* Color del número */
+    font-size: 0.8rem; /* Tamaño del número */
+    margin-right: 0.5rem; /* Espacio entre el círculo y el texto */
 }
         body {
     margin: 0;
