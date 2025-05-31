@@ -571,50 +571,46 @@
             });
         }
 // Chart.js integration
-        const ctx = document.getElementById('marketGrowthChart');
-        if (ctx) {
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['2023', '2026 (Proj.)', '2029 (Proj.)', '2031 (Proj.)'],
-                    datasets: [{
-                        label: 'Valor del Mercado Global (Billones USD)',
-                        data: [57.14, 70.0, 81.5, 87.67],
-                        backgroundColor: '#a5d6a7', // Un verde suave para las barras
-                        borderColor: '#388e3c',
-                        borderWidth: 1
-                    }]
+const ctx = document.getElementById('marketGrowthChart');
+if (ctx) {
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Valor Mercado 2023', 'Proyección Valor 2031'],
+            datasets: [{
+                label: 'Valor del Mercado Global (Miles de Millones USD)',
+                data: [57.14, 87.67],
+                backgroundColor: '#a5d6a7', // Un verde suave para las barras
+                borderColor: '#388e3c',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Miles de Millones USD'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: false, // No hay título en la imagen
                 },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Billones USD'
-                            }
-                        }
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Proyección del Crecimiento del Mercado Global de Perfumes',
-                            font: {
-                                size: 14
-                            }
-                        },
-                        legend: {
-                            display: false
-                        }
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    aspectRatio: 2.5
-                },
-                width: 700, // Forzando un ancho mayor
-                height: 400 // Forzando una altura mayor
-            });
-        }
+                legend: {
+                    display: false
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            aspectRatio: 2.5
+        },
+        width: 700, // Forzando un ancho mayor
+        height: 400 // Forzando una altura mayor
+    });
+}
 
         // Enlace del botón CTA (ajusta la URL según necesites)
         if (ctaButton) {
