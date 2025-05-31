@@ -14,8 +14,8 @@
     margin-left: auto;
     margin-right: auto;
     height: auto;
-    min-width: 500px; /* Prueba con este valor */
-    min-height: 300px; /* Prueba con este valor */
+    min-width: 300px; /* Ajustado para mejor responsividad inicial */
+    min-height: 200px; /* Ajustado para mejor responsividad inicial */
 }
 @media (min-width: 768px) {
     .chart-container {
@@ -203,6 +203,12 @@
         .market-data-text {
     font-size: 0.85rem; /* Reduce el tamaño de la fuente */
 }
+        .subtle-other-nod {
+            background-color: #e0f2f7; /* Un azul muy claro */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body class="bg-orange-50 text-stone-800 font-sans leading-relaxed">
@@ -225,7 +231,7 @@
     </button>
 </nav>
         </div>
-      <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg py-2">
+    <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg py-2">
     <a href="#introduccion" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Introducción</a>
     <a href="#tendencias" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Tendencias</a>
     <a href="#conclusion-section" class="block nav-link text-stone-600 hover:text-emerald-700 px-4 py-2">Reflexiones</a>
@@ -246,14 +252,16 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-2 gap-8 items-start bg-white p-6 rounded-xl shadow-xl">
-              <div>
-    <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Un Mercado en Auge</h3>
-    <p class="text-stone-700 mb-2 text-sm market-data-text">El mercado global de perfumes, valorado en <strong>57.14 mil millones USD en 2023</strong>, se proyecta alcanzar <strong>87.67 mil millones USD para 2031</strong> (CAGR 6.31%).</p>
-    <p class="text-stone-700 mb-2 text-sm market-data-text">Este crecimiento está impulsado significativamente por el <strong>resurgimiento del interés en las fragancias finas tras la pandemia</strong>, donde los consumidores buscan <strong>bienestar y autoexpresión</strong> a través de los aromas. Además, la creciente influencia de las <strong>generaciones más jóvenes, como la Gen Z y la Alfa</strong>, con sus propias preferencias y canales de compra, está dinamizando el mercado.</p>
-    <p class="text-stone-700 mb-2 text-sm market-data-text">La tendencia hacia la <strong>premiumización</strong>, donde los consumidores están dispuestos a invertir en productos de mayor calidad y experiencias únicas, también juega un papel crucial en este crecimiento proyectado.</p>
-    <p class="text-stone-700 text-sm market-data-text">El futuro de la perfumería se moldea por la <strong class="lab-future-concept-text">personalización</strong>, la <strong class="lab-future-concept-text">tecnología</strong>, el <strong class="lab-future-concept-text">bienestar</strong> y la <strong class="lab-future-concept-text">sostenibilidad</strong>, redefiniendo la relación del consumidor con el aroma y abriendo nuevas vías para la innovación y el crecimiento de la industria.</p>
-</div>
-                <div class="chart-container">
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-700 mb-4">¡Olfato en Expansión! 🚀</h3>
+                    <p class="text-stone-700 text-lg leading-relaxed mb-4">
+                        El universo de los perfumes no para de crecer. Con una valoración de <strong>57 mil millones de dólares en 2023</strong>, se espera que alcance la impresionante cifra de casi <strong>88 mil millones para 2031</strong>. ¿La clave? Un renovado interés por fragancias que nos hacen sentir bien y nos definen, ¡especialmente entre las nuevas generaciones!
+                    </p>
+                    <p class="text-stone-700 text-sm italic">
+                        Prepárate para un futuro olfativo donde la innovación y la conexión emocional marcan el camino.
+                    </p>
+                </div>
+                <div class="chart-container relative h-64">
                     <canvas id="marketGrowthChart"></canvas>
                 </div>
             </div>
@@ -266,7 +274,7 @@
             <p class="section-subtitle">
                 Explora las cuatro macrotendencias que están reconfigurando la industria de las fragancias, desde cómo se crean y comercializan hasta cómo los consumidores las experimentan e integran en sus vidas.
             </p>
-<div class="mb-6 flex flex-wrap justify-center gap-2 sm:gap-3" style="margin-top: 3rem;">    <button data-tab="sostenibilidad" class="tab-button pill-button active">
+<div class="mb-6 flex flex-wrap justify-center gap-2 sm:gap-3" style="margin-top: 3rem;">     <button data-tab="sostenibilidad" class="tab-button pill-button active">
         <span class="number-circle">1</span>
         <span>🌿 Sostenibilidad y Transparencia</span>
     </button>
@@ -352,7 +360,7 @@
                             <li><span class="brand-highlight">Hermès:</span> Ha expandido su oferta a productos para el hogar (velas, sprays) que mejoran el bienestar general.</li>
                         </ul>
                         <h5 class="font-semibold text-emerald-600 text-lg mb-2">Perspectiva y Oportunidad:</h5>
-                        <div class="subtle-puig-nod">
+                        <div class="subtle-other-nod">
                             <p>Casas de fragancias con habilidad para construir marcas que evocan emociones y compromiso con el <strong>bienestar</strong> (ej. <span class="brand-highlight">Chanel</span> con sus líneas que inspiran serenidad) están bien situadas.</p>
                             <p>Oportunidad: Desarrollar líneas de <strong>fragancias funcionales</strong> con beneficios validados científicamente y comunicados transparentemente.</p>
                             <p>Potencial: Apelar a un consumidor que busca en el perfume una <strong>herramienta para mejorar su calidad de vida</strong>.</p>
@@ -387,10 +395,10 @@
                             Imagínate una IA que analiza tu estado de ánimo y tu entorno para sugerirte o incluso crear en el momento la fragancia perfecta para ti.
                         </div>
                     </div>
-            </div>
-        </section>
+                </div>
+            </section>
 
-        <div class="my-10 border-t border-stone-300"></div>
+            <div class="my-10 border-t border-stone-300"></div>
 
     <section id="conclusion-section" class="py-10 section-fade-in mb-10">
         <h3 class="section-title">Reflexiones: Navegando el Dinámico Futuro Olfativo</h3>
@@ -431,194 +439,149 @@
             <dt><strong class="underline decoration-emerald-500 decoration-2">Nota de Fondo</strong></dt>
             <dd>Las notas más duraderas y ricas de un perfume, que se revelan al final y proporcionan la base de la fragancia.</dd>
 
-            <dt><strong class="underline decoration-emerald-500 decoration-2">Sillage</strong></dt>
+            <dt><strong class="underline decoration-emerald--500 decoration-2">Sillage</strong></dt>
             <dd>La estela o rastro que deja un perfume al pasar.</dd>
 
             <dt><strong class="underline decoration-emerald-500 decoration-2">Fijador</strong></dt>
             <dd>Ingrediente que ayuda a que un perfume dure más tiempo en la piel.</dd>
 
             <dt><strong class="underline decoration-emerald-500 decoration-2">Absoluto</strong></dt>
-            <dd>Extracto de planta aromática obtenido mediante solventes, más concentrado que un aceite esencial.</dd>
+            <dd>Extracto de planta fragante obtenido mediante un proceso de solventes, utilizado en perfumería de alta calidad.</dd>
         </dl>
     </div>
 
-    <section id="mi-manifiesto" class="py-10 section-fade-in">
-        <div class="bg-white p-8 rounded-xl shadow-md">
-            <h4 class="text-2xl font-bold text-emerald-700 mb-4 text-center">Mi Manifiesto por el Futuro Olfativo</h4>
-            <p class="text-stone-700 leading-relaxed mb-4">
-                Creo firmemente que el futuro de la perfumería reside en la convergencia de la <strong class="manifiesto-bold">sostenibilidad</strong>, la <strong class="manifiesto-bold">tecnología</strong>, el enfoque en el <strong class="manifiesto-bold">bienestar</strong> y la <strong class="manifiesto-bold">personalización</strong>. No se trata solo de crear aromas agradables, sino de construir experiencias olfativas que respeten nuestro planeta, se enriquezcan con la innovación digital y aporten valor a la vida de las personas.
+    <section id="mi-manifiesto" class="section-fade-in">
+        <div class="container mx-auto p-6">
+            <h4 class="text-2xl font-bold text-emerald-700 mb-4 text-center">Nuestro Manifiesto Olfativo</h4>
+            <p class="text-md text-stone-700 leading-relaxed mb-4 text-center">
+                Creemos en un futuro donde el perfume trasciende la moda, convirtiéndose en una extensión de nuestra identidad y bienestar. Un futuro donde la sostenibilidad y la tecnología se unen para crear experiencias olfativas más conscientes y personalizadas.
             </p>
-            <h5 class="font-semibold text-emerald-600 text-lg mb-2 text-center">El Mañana Olfativo: Un Esquema de Avances</h5>
-            <ul class="mt-4">
-                <li>
-                    <strong class="manifiesto-bold">Perfumes Conscientes:</strong> Ingredientes de origen ético y sostenible, envases eco-diseñados.
-                </li>
-                <li>
-                    <strong class="manifiesto-bold">Aromas Inteligentes:</strong> Creación y recomendación de fragancias mediante IA, experiencias "phygitales" inmersivas.
-                </li>
-                <li>
-                    <strong class="manifiesto-bold">Bienestar Olfativo:</strong> Fragancias funcionales con beneficios emocionales y cognitivos probados.
-                </li>
-                <li>
-                    <strong class="manifiesto-bold">Perfumes a Medida:</strong> Personalización a gran escala, permitiendo a cada individuo crear su firma olfativa única.
-                </li>
+            <ul class="list-none space-y-2 text-stone-700">
+                <li><strong class="manifiesto-bold">Honramos la naturaleza:</strong> Priorizando ingredientes sostenibles y prácticas responsables.</li>
+                <li><strong class="manifiesto-bold">Abrazamos la innovación:</strong> Utilizando la tecnología para enriquecer la experiencia olfativa.</li>
+                <li><strong class="manifiesto-bold">Celebramos la individualidad:</strong> Ofreciendo caminos hacia la personalización y la autoexpresión.</li>
+                <li><strong class="manifiesto-bold">Promovemos el bienestar:</strong> Explorando el poder de los aromas para mejorar nuestro día a día.</li>
             </ul>
-            <p class="text-stone-700 leading-relaxed mt-4 text-center">
-            </p>
         </div>
     </section>
-        
+
     <section id="articulos-relacionados" class="py-10 section-fade-in">
-        <h3 class="section-title">Artículos Relacionados</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                <a href="https://elgeneracionalpost.com/actualidad/sociedad-actualidad/2025/0422/215963/la-inteligencia-artificial-que-ha-revolucionado-el-mundo-de-los-perfumes.html" target="_blank">
-                    <img src="Generacional.jpg" alt="Perfume IA" class="w-full h-auto object-cover">
-                    <div class="p-4">
-                        <div class="uppercase text-gray-500 text-xs mb-1">IA PERFUMES</div>
-                        <h4 class="font-semibold text-emerald-700 mb-2 text-sm">La inteligencia artificial que ha revolucionado el mundo de los perfumes.</h4>
-                        <p class="text-stone-600 text-xs">Un claro ejemplo es XIA Perfumes, donde la IA permite crear aromas únicos.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                <a href="https://divainparfums.es/blogs/blog-divain/puede-un-perfume-ser-sostenible-lo-que-debes-saber" target="_blank">
-                        <img src="Divain_sustain.jpeg" alt="Perfume Sostenible" class="w-full h-auto object-cover">
-                    <div class="p-4">
-                        <div class="uppercase text-gray-500 text-xs mb-1">SOSTENIBILIDAD</div>
-                        <h4 class="font-semibold text-emerald-700 mb-2 text-sm">¿Puede un perfume ser sostenible? Lo que debes saber.</h4>
-                        <p class="text-stone-600 text-xs">Analizamos si un perfume puede ser realmente sostenible y qué buscar.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                <a href="https://www.durance.es/blog/la-ciencia-detras-de-los-aromas-como-funcionan-las-fragancias-en-el-cerebro-n20" target="_blank">
-                    <img src="Durance.jpeg" alt="Aromaterapia Ciencia" class="w-full h-auto object-cover">
-                    <div class="p-4">
-                        <div class="uppercase text-gray-500 text-xs mb-1">AROMATERAPIA</div>
-                        <h4 class="font-semibold text-emerald-700 mb-2 text-sm">La ciencia detrás de los aromas: Cómo funcionan las fragancias en el cerebro.</h4>
-                        <p class="text-stone-600 text-xs">Investigamos cómo los aromas influyen en neurotransmisores y nuestro bienestar.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                <a href="https://www.reasonwhy.es/actualidad/digitalizacion-olfato-camino-inteligencia-artificial-osmo" target="_blank">
-                    <img src="Reasonwhy.jpeg" alt="Olfato Digital" class="w-full h-auto object-cover">
-                    <div class="p-4">
-                        <div class="uppercase text-gray-500 text-xs mb-1">TECNOLOGÍA</div>
-                        <h4 class="font-semibold text-emerald-700 mb-2 text-sm">Digitalización del olfato: el camino hacia la inteligencia artificial de Osmo.</h4>
-                        <p class="text-stone-600 text-xs">Un proyecto busca digitalizar el olfato para que una IA pueda crear perfumes únicos.</p>
-                    </div>
-                </a>
+        <div class="container mx-auto text-center">
+            <h3 class="section-title">Artículos Relacionados</h3>
+            <p class="section-subtitle">Descubre más sobre el fascinante mundo de la perfumería y las últimas tendencias.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h4 class="text-xl font-semibold text-emerald-600 mb-2">El auge de las fragancias sostenibles</h4>
+                    <p class="text-sm text-stone-700">Un análisis sobre cómo las marcas están adoptando prácticas eco-conscientes.</p>
+                    <a href="#" class="text-emerald-500 hover:underline text-sm mt-2 inline-block">Leer más</a>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h4 class="text-xl font-semibold text-emerald-600 mb-2">La tecnología al servicio del olfato</h4>
+                    <p class="text-sm text-stone-700">Cómo la IA y la realidad aumentada están transformando la perfumería.</p>
+                    <a href="#" class="text-emerald-500 hover:underline text-sm mt-2 inline-block">Leer más</a>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h4 class="text-xl font-semibold text-emerald-600 mb-2">Perfumes que cuidan: la tendencia del bienestar</h4>
+                    <p class="text-sm text-stone-700">Exploramos las fragancias diseñadas para mejorar el estado de ánimo y la concentración.</p>
+                    <a href="#" class="text-emerald-500 hover:underline text-sm mt-2 inline-block">Leer más</a>
+                </div>
             </div>
         </div>
     </section>
 
-         <section id="cta-section" class="section-fade-in mt-10 text-center">
-        <h3 class="section-title">¿Listo para Liderar la Innovación Olfativa?</h3>
-        <p class="text-lg text-stone-700 mb-6">
-            Si tu marca busca definir el futuro del perfume, estoy aquí para ayudarte a construir ese camino juntos.
-        </p>
-        <a href="#contacto" id="cta-button" class="inline-block px-6 py-3 rounded-md text-white font-bold bg-emerald-500 hover:bg-emerald-600 transition-colors duration-300">Hablemos del Futuro Olfativo</a>
+    <section id="cta-section" class="py-10 section-fade-in">
+        <div class="container mx-auto text-center">
+            <h3 class="text-2xl font-semibold text-emerald-700 mb-4">¿Interesado en el futuro de la perfumería?</h3>
+            <p class="text-lg text-stone-700 mb-6">¡Hablemos sobre cómo estas tendencias pueden impactar tu marca o negocio!</p>
+            <a href="#contacto" id="cta-button">Contacta con nosotros</a>
+        </div>
     </section>
-    <div class="my-10"></div>
 
 </main>
 
-    <footer class="bg-white text-center py-4 text-sm text-gray-600 mt-10 shadow-inner">
-        <div class="container">
-            &copy; 2025 El Futuro Olfativo. Todos los derechos reservados.
-        </div>
-    </footer>
+<footer class="bg-white text-center py-4 text-stone-500 text-sm">
+    <p>&copy; 2025 El Futuro Olfativo. Todos los derechos reservados.</p>
+</footer>
 
-    <script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
-        const body = document.body;
-        const ctaButton = document.getElementById('cta-button');
-
-        function showTab(tabId) {
-            tabContents.forEach(content => {
-                content.classList.add('hidden');
-            });
-            tabButtons.forEach(button => {
-                button.classList.remove('active');
-            });
-            document.getElementById(tabId).classList.remove('hidden');
-            const activeButton = Array.from(tabButtons).find(button => button.getAttribute('data-tab') === tabId);
-            if (activeButton) {
-                activeButton.classList.add('active');
-            }
-        }
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
 
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const tabId = button.getAttribute('data-tab');
-                showTab(tabId);
+
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.add('hidden'));
+
+                button.classList.add('active');
+                document.getElementById(tabId).classList.remove('hidden');
             });
         });
-
-        // Inicialmente mostrar la pestaña de sostenibilidad
-        showTab('sostenibilidad');
-
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const mobileMenu = document.getElementById('mobileMenu');
 
         if (mobileMenuButton && mobileMenu) {
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
         }
-// Chart.js integration
-const ctx = document.getElementById('marketGrowthChart');
-if (ctx) {
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Valor Mercado 2023', 'Proyección Valor 2031'],
-            datasets: [{
-                label: 'Valor del Mercado Global (Miles de Millones USD)',
-                data: [57.14, 87.67],
-                backgroundColor: '#a5d6a7', // Un verde suave para las barras
-                borderColor: '#388e3c',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Miles de Millones USD'
-                    }
-                }
-            },
-            plugins: {
-                title: {
-                    display: false, // No hay título en la imagen
-                },
-                legend: {
-                    display: false
-                }
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            aspectRatio: 2.5
-        },
-        width: 700, // Forzando un ancho mayor
-        height: 400 // Forzando una altura mayor
-    });
-}
 
-        // Enlace del botón CTA (ajusta la URL según necesites)
-        if (ctaButton) {
-            ctaButton.addEventListener('click', () => {
-                window.location.href = "#contacto"; // Reemplaza "#contacto" con la URL deseada
+        // Chart.js integration
+        const ctx = document.getElementById('marketGrowthChart');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031'],
+                    datasets: [{
+                        label: 'Valor del Mercado Global (Miles de Millones USD)',
+                        data: [57.14, 60.5, 64.1, 67.9, 71.9, 76.1, 80.5, 84.0, 87.67],
+                        borderColor: '#388e3c',
+                        backgroundColor: 'rgba(56, 142, 60, 0.2)',
+                        borderWidth: 3,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#388e3c',
+                        pointBorderColor: '#fff',
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Miles de Millones USD'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Año'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                        },
+                        title: {
+                            display: true,
+                            text: 'Evolución Proyectada del Mercado Global de Perfumes',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                }
             });
         }
-    </script>
+    });
+</script>
 
 </body>
 </html>
