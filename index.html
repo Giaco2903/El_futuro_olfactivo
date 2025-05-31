@@ -564,21 +564,10 @@
 
             let resultado = "";
 
-            if (respuestasNecesidad.hasOwnProperty(necesidadSeleccionada)) {
-                resultado += respuestasNecesidad[necesidadSeleccionada] + " ";
-            }
-
-            if (respuestasTecnologia.hasOwnProperty(tecnologiaSeleccionada)) {
-                resultado += respuestasTecnologia[tecnologiaSeleccionada] + " ";
-            }
-
-            if (respuestasSostenibilidad.hasOwnProperty(sostenibilidadSeleccionada)) {
-                resultado += respuestasSostenibilidad[sostenibilidadSeleccionada] + ". ";
-            }
-
-            if (respuestasFormato.hasOwnProperty(formatoSeleccionado)) {
-                resultado += respuestasFormato[formatoSeleccionada] + ". ";
-            }
+            resultado += respuestasNecesidad[necesidadSeleccionada] ? respuestasNecesidad[necesidadSeleccionada] + " " : "";
+            resultado += respuestasTecnologia[tecnologiaSeleccionada] ? respuestasTecnologia[tecnologiaSeleccionada] + " " : "";
+            resultado += respuestasSostenibilidad[sostenibilidadSeleccionada] ? respuestasSostenibilidad[sostenibilidadSeleccionada] + ". " : "";
+            resultado += respuestasFormato[formatoSeleccionado] ? respuestasFormato[formatoSeleccionado] + ". " : "";
 
             if (ingredienteTexto) {
                 resultado += `Te inspira la idea de un resurgimiento de "${ingredienteTexto}".`;
