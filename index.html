@@ -566,8 +566,7 @@
             resultado += respuestasNecesidad[necesidadSeleccionada] ? respuestasNecesidad[necesidadSeleccionada] + " " : "";
             resultado += respuestasTecnologia[tecnologiaSeleccionada] ? respuestasTecnologia[tecnologiaSeleccionada] + " " : "";
             resultado += respuestasSostenibilidad[sostenibilidadSeleccionada] ? respuestasSostenibilidad[sostenibilidadSeleccionada] + ". " : "";
-            resultado += respuestasFormato[formatoSeleccionado] ? respuestasFormato[formatoSeleccionado] + ". " : "";
-
+resultado += respuestasFormato[formatoSeleccionado] ? respuestasFormato[formatoSeleccionado] + "." : ""; // Cambiado aquí
             if (ingredienteTexto) {
                 resultado += `Te inspira la idea de un resurgimiento de "${ingredienteTexto}".`;
             }
