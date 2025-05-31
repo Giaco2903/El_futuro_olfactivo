@@ -562,10 +562,23 @@
             const formatoSeleccionado = formatoSelect.value;
             const ingredienteTexto = ingredienteInput.value.trim();
 
-            let resultado = respuestasNecesidad[necesidadSeleccionada] + " ";
-            resultado += respuestasTecnologia[tecnologiaSeleccionada] + " ";
-            resultado += respuestasSostenibilidad[sostenibilidadSeleccionada] + ". ";
-            resultado += respuestasFormato[formatoSeleccionado] + ". ";
+            let resultado = "";
+
+            if (respuestasNecesidad.hasOwnProperty(necesidadSeleccionada)) {
+                resultado += respuestasNecesidad[necesidadSeleccionada] + " ";
+            }
+
+            if (respuestasTecnologia.hasOwnProperty(tecnologiaSeleccionada)) {
+                resultado += respuestasTecnologia[tecnologiaSeleccionada] + " ";
+            }
+
+            if (respuestasSostenibilidad.hasOwnProperty(sostenibilidadSeleccionada)) {
+                resultado += respuestasSostenibilidad[sostenibilidadSeleccionada] + ". ";
+            }
+
+            if (respuestasFormato.hasOwnProperty(formatoSeleccionado)) {
+                resultado += respuestasFormato[formatoSeleccionada] + ". ";
+            }
 
             if (ingredienteTexto) {
                 resultado += `Te inspira la idea de un resurgimiento de "${ingredienteTexto}".`;
